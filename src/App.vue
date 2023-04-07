@@ -5,25 +5,24 @@ import AppMain from './components/AppMain.vue';
 
 export default {
   name: 'App',
-  components: { AppHeader, AppFooter, AppMain }, 
+  components: { AppHeader, AppFooter, AppMain },
 };
 </script>
 
 <template>
-<AppHeader />
-<AppMain />
-<AppFooter />
+  <AppHeader />
+  <AppMain />
+  <AppFooter />
 </template>
 
 <style lang="scss">
-
 @import "./assets/styles/variables.scss";
 
 body {
-    background-color: $bg-primary;
+  background-color: $bg-primary;
 }
 
 .text-green {
-    color: $primary-color;
+  color: $primary-color;
 }
 </style>
