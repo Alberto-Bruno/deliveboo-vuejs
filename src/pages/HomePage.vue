@@ -36,54 +36,69 @@ export default {
   <section>
     <div class="jumbo"></div>
     <div class="container">
-
       <div class="section-header my-5">
-        <h1 class="fw-bolder text-light">Le cucine più amate </h1>
-        <p class="text-light my-3">Trova le cucine più amate dai ristoranti e ordina online a domicilio.</p>
+        <h1 class="fw-bolder text-light">Le cucine più amate</h1>
+        <p class="text-light my-3">
+          Trova le cucine più amate dai ristoranti e ordina online a domicilio.
+        </p>
       </div>
 
       <div class="text-center">
-        <p class="text-light fw-4 fs-4 m-0">Scegli le tue tipologie
+        <p class="text-light fw-4 fs-4 m-0">
+          Scegli le tue tipologie
           <font-awesome-icon icon="fa-solid fa-arrow-down" class="fs-2" />
         </p>
       </div>
 
-      <div class="row row-cols-lg-3  row-cols-md-2 row-cols-1 mb-5 mt-3 d-flex justify-content-center">
-
-        <div class="col my-5" :class="{ checked: checked.includes(t.name) }" v-for="t in types" :key="t.id">
-          <input v-model="checked" type="checkbox" :id="t.name" :value="t.name" />
+      <div
+        class="row row-cols-lg-3 row-cols-md-2 row-cols-1 mb-5 mt-3 d-flex justify-content-center">
+        <div
+          class="col my-5"
+          :class="{ checked: checked.includes(t.name) }"
+          v-for="t in types"
+          :key="t.id">
+          <input
+            v-model="checked"
+            type="checkbox"
+            :id="t.name"
+            :value="t.name" />
           <label :for="t.name" class="h-100 w-100">
             <div class="cs-card h-100 w-100 d-flex justify-content-center">
               <figure class="h-100 w-100 px-5">
-                <img :src="t.image" :alt="t.name" class="w-100 h-100" :class="{ activeTop: checked.includes(t.name) }" />
-                <figcaption class="bg-light" :class="{ activeBottom: checked.includes(t.name) }">{{ t.name }}</figcaption>
+                <img
+                  :src="t.image"
+                  :alt="t.name"
+                  class="w-100 h-100"
+                  :class="{ activeTop: checked.includes(t.name) }" />
+                <figcaption
+                  class="bg-light"
+                  :class="{ activeBottom: checked.includes(t.name) }">
+                  {{ t.name }}
+                </figcaption>
               </figure>
             </div>
           </label>
         </div>
       </div>
 
-      <div class="d-flex justify-content-center my-3 ">
-        <button class="btn btn-success py-1 px-3 fs-5">
+      <div class="d-flex justify-content-center my-3">
+        <RouterLink
+          class="btn btn-success py-1 px-3 fs-5"
+          :to="{ name: 'restaurants', query: { types: checked } }">
           <font-awesome-icon icon="fa-solid fa-utensils" class="me-2" />
           Conferma le tue selezioni
-        </button>
+        </RouterLink>
       </div>
-
-
     </div>
   </section>
 
-  <section id="deliveboo-app">
-
-  </section>
+  <section id="deliveboo-app"></section>
 </template>
 
 <style scoped lang="scss">
 @import "../assets/styles/variables.scss";
 
 .jumbo {
-
   height: 350px;
   background-image: url("	https://d2egcvq7li5bpq.cloudfront.net/a/hw/img/decoration/bg_hero-wide.jpg");
   background-size: cover;
@@ -98,7 +113,6 @@ export default {
 .col {
   position: relative;
   height: 200px;
-
 
   input {
     position: absolute;
@@ -127,9 +141,6 @@ export default {
       font-weight: 500;
       padding: 10px 0;
     }
-
-
-
   }
 }
 
@@ -142,12 +153,13 @@ export default {
 }
 
 .activeTop {
-  box-shadow: -10px -10px 10px -10px #e5c68b, 10px -10px 10px -10px #e5c68b, 10px 10px 10px -10px #e5c68b, -10px 10px 10px -10px #e5c68b, 0px 0px 10px #e5c68b;
-
+  box-shadow: -10px -10px 10px -10px #e5c68b, 10px -10px 10px -10px #e5c68b,
+    10px 10px 10px -10px #e5c68b, -10px 10px 10px -10px #e5c68b,
+    0px 0px 10px #e5c68b;
 }
 
 .activeBottom {
-  box-shadow: -10px 10px 10px -10px #e5c68b, 10px 10px 10px -10px #e5c68b, 0px 0px 10px #e5c68b;
-
+  box-shadow: -10px 10px 10px -10px #e5c68b, 10px 10px 10px -10px #e5c68b,
+    0px 0px 10px #e5c68b;
 }
 </style>
