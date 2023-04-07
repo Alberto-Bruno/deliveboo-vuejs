@@ -1,23 +1,21 @@
 <script>
-import HomePage from '../pages/HomePage.vue';
 export default {
-    name: 'AppMain',
-    components: { HomePage },
-}
+  name: "AppMain",
+};
 </script>
 
 <template>
-    <main>
-        <div>
-            <HomePage></HomePage>
-        </div>
-    </main>
+  <main>
+    <div>
+      <Router-view></Router-view>
+    </div>
+  </main>
 </template>
 
 <style lang="scss" scoped>
 @import "../assets/styles/variables.scss";
 
 main {
-    min-height: 500px;
+  min-height: 500px;
 }
 </style>
