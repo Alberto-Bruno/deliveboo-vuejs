@@ -43,8 +43,15 @@ export default {
 
 <template>
   <section>
+
+
+
     <div class="container py-4 justify-content-center d-flex flex-column align-items-center">
-      <h1 class="text-white text-center mb-4">Ristoranti Trovati</h1>
+      <h1 v-if="restaurants.length" class="text-white text-center mb-4">Ristoranti Trovati</h1>
+      <h1 v-else class="text-white text-center my-4">Non ci sono ristoranti che corrispondono alla tua ricerca</h1>
+      <div>
+
+      </div>
 
       <div class="card-deck">
         <div v-for="restaurant in restaurants" :key="restaurant.id" class="card mb-3">
