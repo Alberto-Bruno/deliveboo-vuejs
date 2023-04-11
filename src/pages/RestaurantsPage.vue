@@ -33,6 +33,17 @@ export default {
         });
     },
 
+    getRestaurantTypes (types) {
+      let t= '';
+      types.forEach((type) => {
+        t += type.name + ', ';
+      
+      });
+      return t.slice(0, -2);
+
+
+    },
+
     getImageRestaurants(restaurant) {
       if (restaurant.image) return restaurant.image;
       return restaurant.types[0].image;
@@ -104,6 +115,14 @@ export default {
                           : " -"
                         }}</span>
                     </h5>
+                    <div class="d-flex">
+                      <h5 class="fw-bold me-2">Tipologia:</h5>
+                      <div>
+                        <span class="me-2" > {{ getRestaurantTypes(restaurant.types) }} </span>
+
+                      </div>
+                    </div>
+
                   </div>
                 </div>
               </div>
