@@ -30,6 +30,8 @@ export default {
           </li>
         </ul>
 
+        <a class="btn btn-success py-1 px-3 fs-5" href="http://127.0.0.1:8000/login">Login |
+          Registrati</a>
         <!-- Right Side Of Navbar -->
       </div>
     </div>
@@ -43,7 +45,7 @@ export default {
   font-size: 25px;
 
   .green-title {
-    color: $primary-color;
+    color: $bg-logo;
   }
 
   .blue-title {
@@ -56,5 +58,6 @@ export default {
     top: 8px;
     // margin-top: 15px;
   }
+
 }
 </style>
