@@ -1,10 +1,32 @@
 <script>
+const apiBase = "http://127.0.0.1:8000/api/restaurants/types";
+import axios from "axios";
 export default {
   name: "RestaurantsPage",
   data() {
     return {
-      params: this.$route.query.types,
+      typesFilter: this.$route.query.types,
     };
+  },
+  methods: {
+    getRestaurants() {
+      const query = {
+        params: {
+          types: this.typesFilter,
+        },
+      };
+      axios
+        .get(apiBase, query)
+        .then((res) => {
+          console.log(res.data.restaurants);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+  },
+  mounted() {
+    this.getRestaurants();
   },
 };
 </script>
