@@ -37,6 +37,7 @@ export default {
   },
   mounted() {
     this.getRestaurants();
+    this.$refs.container.scrollIntoView();
   },
 };
 </script>
@@ -49,9 +50,10 @@ export default {
     <div class="container py-4 justify-content-center d-flex flex-column align-items-center">
       <h1 v-if="restaurants.length" class="text-white text-center mb-4">Ristoranti Trovati</h1>
       <h1 v-else class="text-white text-center my-4">Non ci sono ristoranti che corrispondono alla tua ricerca</h1>
-      <div>
-
+      <div class="my-2">
+            <a href="/"><i class="fa-solid fa-arrow-left fa-2x text-green"></i></a>
       </div>
+      
 
       <div class="card-deck">
         <div v-for="restaurant in restaurants" :key="restaurant.id" class="card mb-3">
@@ -90,11 +92,9 @@ export default {
                     </h5>
                   </div>
                 </div>
-              </div>
-            </div>
           </div>
-        </div>
       </div>
+      
     </div>
   </section>
 </template>
@@ -105,6 +105,10 @@ a {
   color: inherit;
 }
 
+.text-green {
+  font-size: 50px;
+    margin-left: 20px;
+}
 .card {
   max-width: 900px;
   margin-bottom: 30px;
