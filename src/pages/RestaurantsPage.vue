@@ -26,6 +26,14 @@ export default {
           console.error(err);
         });
     },
+
+    getImageRestaurants(restaurant) {
+      if (restaurant.image) return restaurant.image;
+      return restaurant.types[0].image;
+    }
+
+
+
   },
   mounted() {
     this.getRestaurants();
@@ -35,22 +43,15 @@ export default {
 
 <template>
   <section>
-    <div
-      class="container py-4 justify-content-center d-flex flex-column align-items-center">
+    <div class="container py-4 justify-content-center d-flex flex-column align-items-center">
       <h1 class="text-white text-center mb-4">Ristoranti Trovati</h1>
 
       <div class="card-deck">
-        <div
-          v-for="restaurant in restaurants"
-          :key="restaurant.id"
-          class="card mb-3">
+        <div v-for="restaurant in restaurants" :key="restaurant.id" class="card mb-3">
           <div class="row no-gutters">
             <div class="col-md-4 img-section">
               <a href="#">
-                <img
-                  :src="restaurant.types[0].image"
-                  class="card-img"
-                  alt="..." />
+                <img :src="getImageRestaurants(restaurant)" class="card-img h-100" :alt="restaurant.name" />
               </a>
             </div>
             <div class="col-md-8">
@@ -67,8 +68,8 @@ export default {
                     <h5 class="card-title fw-bold">
                       Costo di consegna:<span class="txt-light">{{
                         restaurant.delivery_cost === "0.00"
-                          ? " Gratis"
-                          : "€ " + restaurant.delivery_cost
+                        ? " Gratis"
+                        : "€ " + restaurant.delivery_cost
                       }}</span>
                     </h5>
 
@@ -76,10 +77,9 @@ export default {
                       Ordine Minimo:<span class="txt-light">
                         {{
                           restaurant.min_order
-                            ? "€" + restaurant.min_order
-                            : " -"
-                        }}</span
-                      >
+                          ? "€" + restaurant.min_order
+                          : " -"
+                        }}</span>
                     </h5>
                   </div>
                 </div>
@@ -97,6 +97,7 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
 .card {
   max-width: 900px;
   margin-bottom: 30px;
