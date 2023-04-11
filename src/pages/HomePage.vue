@@ -46,17 +46,21 @@ export default {
       <div class="text-center">
         <p class="text-light fw-4 fs-4 m-0">
           Scegli le tue tipologie
-          <font-awesome-icon icon="fa-solid fa-arrow-down" class="fs-2" />
+          <a href="#types-restaurant" id="arrow-types">
+            <font-awesome-icon icon="fa-solid fa-arrow-down" class="fs-2" />
+          </a>
+          
         </p>
       </div>
 
       <div
-        class="row row-cols-lg-3 row-cols-md-2 row-cols-1 mb-5 mt-3 d-flex justify-content-center">
+        class="row row-cols-lg-3 row-cols-md-2 row-cols-1 mb-5 mt-3 d-flex justify-content-center" id="types-restaurant">
         <div
           class="col my-5"
           :class="{ checked: checked.includes(t.name) }"
           v-for="t in types"
-          :key="t.id">
+          :key="t.id"
+          >
           <input
             v-model="checked"
             type="checkbox"
@@ -104,6 +108,10 @@ export default {
   background-size: cover;
   background-position-y: 25%;
   background-position-x: 50%;
+}
+
+#arrow-types {
+  color: inherit;
 }
 
 .fs-2 {
