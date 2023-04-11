@@ -9,8 +9,7 @@ export default {
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" id="navbar" href="{{ url('/') }}">
         <figure class="m-0">
-          <img class="logo-nav position-static"
-            src="https://d92mrp7hetgfk.cloudfront.net/images/sites/misc/Boolean/original.png?1623187562" alt="" />
+          <img class="logo-nav position-static" src="../assets/img/icon-logo.jpg" alt="" />
         </figure>
         <span class="green-title fw-bold">Delive</span><span class="blue-title fw-bold">Boo</span>
       </a>
