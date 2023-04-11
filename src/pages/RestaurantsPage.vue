@@ -20,7 +20,7 @@ export default {
       axios
         .get(apiBase, query)
         .then((res) => {
-          this.restaurants = response.data.restaurants;
+          this.restaurants = res.data.restaurants;
         })
         .catch((err) => {
           console.error(err);
