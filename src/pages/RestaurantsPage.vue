@@ -1,17 +1,20 @@
 <script>
 const apiBase = "http://127.0.0.1:8000/api/restaurants/types";
 import axios from "axios";
+import AppLoader from "../components/AppLoader.vue";
 export default {
   name: "RestaurantsPage",
+  components: { AppLoader },
   data() {
     return {
       restaurants: [],
-      types: [],
+      isLoading: false,
       typesFilter: this.$route.query.types,
     };
   },
   methods: {
     getRestaurants() {
+      this.isLoading = true;
       const query = {
         params: {
           types: this.typesFilter,
@@ -20,11 +23,25 @@ export default {
       axios
         .get(apiBase, query)
         .then((res) => {
+
           this.restaurants = res.data.restaurants;
         })
         .catch((err) => {
-          console.error(err);
+          this.$router.push({ name: "not-found" });
+        }).then(() => {
+          this.isLoading = false;
         });
+    },
+
+    getRestaurantTypes (types) {
+      let t= '';
+      types.forEach((type) => {
+        t += type.name + ', ';
+      
+      });
+      return t.slice(0, -2);
+
+
     },
 
     getImageRestaurants(restaurant) {
@@ -46,16 +63,19 @@ export default {
   <section>
 
 
-
-    <div class="container py-4 justify-content-center d-flex flex-column align-items-center" ref="container">
+    <app-loader v-if="isLoading" label="Sto cercando">
+      <div class="container py-4 justify-content-center d-flex flex-column align-items-center" ref="container">
+        <font-awesome-icon icon="fa-solid fa-bolt-lightning" class="fa-4x my-5 fa-beat text-light"></font-awesome-icon>
+        <h1 class="text-white text-center mb-4">Sto cercando i ristoranti</h1>
+      </div>
+    </app-loader>
+    <div v-else class="container py-4 justify-content-center d-flex flex-column align-items-center" ref="container">
       <h1 v-if="restaurants.length" class="text-white text-center mb-4">Ristoranti Trovati</h1>
       <h1 v-else class="text-white text-center my-4">Non ci sono ristoranti che corrispondono alla tua ricerca</h1>
-      <div class="my-2 align-self-start">
+      <div class="my-2 align-self-start pb-4">
         <RouterLink :to="{ name: 'home' }" class="d-flex align-items-center gap-2">
           <i class="fa-solid fa-arrow-left fa-2x text-green"></i>
-          Torna
-          alla
-          Home
+
         </RouterLink>
       </div>
 
@@ -95,6 +115,14 @@ export default {
                           : " -"
                         }}</span>
                     </h5>
+                    <div class="d-flex">
+                      <h5 class="fw-bold me-2">Tipologia:</h5>
+                      <div>
+                        <span class="me-2" > {{ getRestaurantTypes(restaurant.types) }} </span>
+
+                      </div>
+                    </div>
+
                   </div>
                 </div>
               </div>
@@ -116,6 +144,7 @@ a {
   font-size: 50px;
   margin-left: 20px;
 }
+
 
 .card {
   max-width: 900px;
@@ -142,6 +171,16 @@ a {
   .card:hover {
     transform: none;
     box-shadow: 0 0 15px rgba(255, 255, 255, 1);
+  }
+
+  .card-img {
+    max-height: 230px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .card-img {
+    max-height: 200px;
   }
 }
 </style>
