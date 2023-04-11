@@ -47,13 +47,18 @@ export default {
 
 
 
-    <div class="container py-4 justify-content-center d-flex flex-column align-items-center">
+    <div class="container py-4 justify-content-center d-flex flex-column align-items-center" ref="container">
       <h1 v-if="restaurants.length" class="text-white text-center mb-4">Ristoranti Trovati</h1>
       <h1 v-else class="text-white text-center my-4">Non ci sono ristoranti che corrispondono alla tua ricerca</h1>
-      <div class="my-2">
-            <a href="/"><i class="fa-solid fa-arrow-left fa-2x text-green"></i></a>
+      <div class="my-2 align-self-start">
+        <RouterLink :to="{ name: 'home' }" class="d-flex align-items-center gap-2">
+          <i class="fa-solid fa-arrow-left fa-2x text-green"></i>
+          Torna
+          alla
+          Home
+        </RouterLink>
       </div>
-      
+
 
       <div class="card-deck">
         <div v-for="restaurant in restaurants" :key="restaurant.id" class="card mb-3">
@@ -92,9 +97,11 @@ export default {
                     </h5>
                   </div>
                 </div>
+              </div>
+            </div>
           </div>
+        </div>
       </div>
-      
     </div>
   </section>
 </template>
@@ -107,8 +114,9 @@ a {
 
 .text-green {
   font-size: 50px;
-    margin-left: 20px;
+  margin-left: 20px;
 }
+
 .card {
   max-width: 900px;
   margin-bottom: 30px;
