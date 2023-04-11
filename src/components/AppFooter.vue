@@ -66,7 +66,7 @@ export default {
                 <div class="col">
                     <h6 class="fw-bold">Cucine</h6>
                     <ul>
-                        <a v-for="t in types" :key="t.id" href="#">
+                        <a class="text-capitalize" v-for="t in types" :key="t.id" href="#">
                             <li>{{ t.name }}</li>
                         </a>
                     </ul>
