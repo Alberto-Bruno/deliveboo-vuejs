@@ -85,7 +85,7 @@ export default {
 .jumbo {
 
   height: 350px;
-  background-image: url("	https://d2egcvq7li5bpq.cloudfront.net/a/hw/img/decoration/bg_hero-wide.jpg");
+  background-image: url("../assets/img/photo_2023-04-11_09.20.16.jpeg");
   background-size: cover;
   background-position-y: 25%;
   background-position-x: 50%;
