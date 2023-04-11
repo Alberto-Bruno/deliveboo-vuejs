@@ -19,7 +19,7 @@ export default {
 @import "./assets/styles/variables.scss";
 
 body {
-  background-color: $bg-primary;
+  background-color: rgb(218, 150, 25);
 }
 
 .text-green {
