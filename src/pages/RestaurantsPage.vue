@@ -15,7 +15,12 @@ export default {
   watch: {
     "$route.query.types"(newQuery) {
       this.typesFilter = newQuery;
-      this.getRestaurants();
+      if (newQuery) {
+        this.getRestaurants();
+      } else {
+        this.typesFilter = [];
+        this.restaurants = [];
+      }
     },
   },
   methods: {

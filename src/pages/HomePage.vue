@@ -15,6 +15,11 @@ export default {
     checked(newValue) {
       this.$router.push({ path: "/", query: { types: newValue } });
     },
+    "$route.query.types"(newQuery) {
+      if (!newQuery) {
+        this.checked = [];
+      }
+    },
   },
   methods: {
     getType() {
@@ -37,9 +42,11 @@ export default {
       return url.href;
     },
   },
-  created() {
+  mounted() {
     this.getType();
-    if (this.$route.query.types) this.checked = this.$route.query.types;
+    if (this.$route.query.types) {
+      this.checked = this.$route.query.types;
+    }
   },
 };
 </script>
