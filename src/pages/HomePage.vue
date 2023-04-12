@@ -25,6 +25,9 @@ export default {
           this.loader = false;
         });
     },
+    intoView(element) {
+      this.$refs[element].scrollIntoView();
+    },
   },
   created() {
     this.getType();
@@ -46,21 +49,22 @@ export default {
       <div class="text-center">
         <p class="text-light fw-4 fs-4 m-0">
           Scegli le tue tipologie
-          <a href="#types-restaurant" id="arrow-types">
-            <font-awesome-icon icon="fa-solid fa-arrow-down" class="fs-2" />
-          </a>
-          
+          <font-awesome-icon
+            icon="fa-solid fa-arrow-down"
+            class="fs-2"
+            @click="intoView('types-restaurant')"
+            role="button" />
         </p>
       </div>
 
       <div
-        class="row row-cols-lg-3 row-cols-md-2 row-cols-1 mb-5 mt-3 d-flex justify-content-center" id="types-restaurant">
+        class="row row-cols-lg-3 row-cols-md-2 row-cols-1 mb-5 mt-3 d-flex justify-content-center"
+        ref="types-restaurant">
         <div
           class="col my-5"
           :class="{ checked: checked.includes(t.name) }"
           v-for="t in types"
-          :key="t.id"
-          >
+          :key="t.id">
           <input
             v-model="checked"
             type="checkbox"
