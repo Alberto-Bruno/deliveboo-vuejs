@@ -76,16 +76,14 @@ export default {
       <h1 v-if="restaurants.length" class="text-white text-center mb-4">
         Ristoranti Trovati
       </h1>
-      <h1 v-else class="text-white text-center my-4">
-        Non ci sono ristoranti che corrispondono alla tua ricerca
+      <h1
+        v-else-if="!restaurants.length && typesFilter.length"
+        class="text-white text-center my-4">
+        Non sono stati trovati ristoranti che soddisfano i tuoi criteri
       </h1>
-      <div class="my-2 align-self-start pb-4">
-        <RouterLink
-          :to="{ name: 'home' }"
-          class="d-flex align-items-center gap-2">
-          <i class="fa-solid fa-arrow-left fa-2x text-green"></i>
-        </RouterLink>
-      </div>
+      <h1 v-else class="text-white text-center my-4">
+        Seleziona almeno una tipologia per inziare la ricerca!
+      </h1>
 
       <div class="card-deck">
         <div
