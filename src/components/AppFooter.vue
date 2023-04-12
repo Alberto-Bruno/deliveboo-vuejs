@@ -59,13 +59,20 @@ export default {
         <div class="col">
           <h6 class="fw-bold">Cucine</h6>
           <ul>
-            <li v-for="t in types" :key="t.id"></li>
+            <li v-for="t in types" :key="t.id" class="text-capitalize">
+              {{ t.name }}
+            </li>
           </ul>
         </div>
         <div class="col">
           <h6 class="fw-bold">Ristoranti</h6>
           <ul>
-            <li v-for="restaurant in restaurants" :key="restaurant.id"></li>
+            <li
+              v-for="restaurant in restaurants"
+              :key="restaurant.id"
+              class="text-capitalize">
+              {{ restaurant.name }}
+            </li>
           </ul>
         </div>
         <div class="col">
