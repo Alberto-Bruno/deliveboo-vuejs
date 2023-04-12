@@ -9,16 +9,14 @@ export default {
     return {
       restaurants: [],
       isLoading: false,
-      typesFilter: this.$route.query.types,
+      typesFilter: [],
     };
   },
+  props: { types: Array },
   watch: {
-    "$route.query.types"(newQuery, oldQuery) {
-      if (newQuery != oldQuery) {
-        this.typesFilter = this.$route.query.types;
-        this.getRestaurants();
-        this.$refs.container.scrollIntoView();
-      }
+    types(newQuery) {
+      this.typesFilter = newQuery;
+      this.getRestaurants();
     },
   },
   methods: {
@@ -55,10 +53,6 @@ export default {
       if (restaurant.image) return restaurant.image;
       return restaurant.types[0].image;
     },
-  },
-  mounted() {
-    this.getRestaurants();
-    this.$refs.container.scrollIntoView();
   },
 };
 </script>

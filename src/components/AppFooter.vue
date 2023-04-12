@@ -59,25 +59,13 @@ export default {
         <div class="col">
           <h6 class="fw-bold">Cucine</h6>
           <ul>
-            <li v-for="t in types" :key="t.id">
-              <router-link
-                class="text-capitalize"
-                :to="{ name: 'restaurants', query: { types: t.name } }">
-                {{ t.name }}
-              </router-link>
-            </li>
+            <li v-for="t in types" :key="t.id"></li>
           </ul>
         </div>
         <div class="col">
           <h6 class="fw-bold">Ristoranti</h6>
           <ul>
-            <li v-for="restaurant in restaurants" :key="restaurant.id">
-              <router-link
-                class="text-capitalize"
-                :to="{ name: 'restaurants' }">
-                {{ restaurant.name }}
-              </router-link>
-            </li>
+            <li v-for="restaurant in restaurants" :key="restaurant.id"></li>
           </ul>
         </div>
         <div class="col">
