@@ -7,31 +7,15 @@ export default {
 <template>
   <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
-      <RouterLink
-        class="navbar-brand d-flex align-items-center"
-        id="navbar"
-        :to="{ name: 'home' }"
-      >
+      <RouterLink class="navbar-brand d-flex align-items-center" id="navbar" :to="{ name: 'home' }">
         <figure class="m-0">
-          <img
-            class="logo-nav position-static"
-            src="https://d92mrp7hetgfk.cloudfront.net/images/sites/misc/Boolean/original.png?1623187562"
-            alt=""
-          />
+          <img class="logo-nav position-static" src="../assets/img/icon-logo.jpg" alt="" />
         </figure>
-        <span class="green-title fw-bold">Delive</span
-        ><span class="blue-title fw-bold">Boo</span>
+        <span class="green-title fw-bold">Delive</span><span class="blue-title fw-bold">Boo</span>
       </RouterLink>
 
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="{{ __('Toggle navigation') }}"
-      >
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -45,11 +29,7 @@ export default {
           </li>
         </ul>
 
-        <a
-          class="btn btn-success py-1 px-3 fs-5"
-          href="http://127.0.0.1:8000/login"
-          >Login | Registrati</a
-        >
+        <a class="btn btn-success py-1 px-3 fs-5" href="http://127.0.0.1:8000/login">Login | Registrati</a>
         <!-- Right Side Of Navbar -->
       </div>
     </div>
@@ -63,7 +43,7 @@ export default {
   font-size: 25px;
 
   .green-title {
-    color: $primary-color;
+    color: $bg-primary;
   }
 
   .blue-title {
