@@ -25,10 +25,17 @@ export default {
           this.loader = false;
         });
     },
+
+    buildImagePath(image) {
+      const url = new URL(`../assets/img/${image}`,
+        import.meta.url);
+      return url.href;
+    }
   },
   created() {
     this.getType();
   },
+
 };
 </script>
 
@@ -49,34 +56,19 @@ export default {
           <a href="#types-restaurant" id="arrow-types">
             <font-awesome-icon icon="fa-solid fa-arrow-down" class="fs-2" />
           </a>
-          
+
         </p>
       </div>
 
-      <div
-        class="row row-cols-lg-3 row-cols-md-2 row-cols-1 mb-5 mt-3 d-flex justify-content-center" id="types-restaurant">
-        <div
-          class="col my-5"
-          :class="{ checked: checked.includes(t.name) }"
-          v-for="t in types"
-          :key="t.id"
-          >
-          <input
-            v-model="checked"
-            type="checkbox"
-            :id="t.name"
-            :value="t.name" />
+      <div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 mb-5 mt-3 d-flex justify-content-center"
+        id="types-restaurant">
+        <div class="col my-5" :class="{ checked: checked.includes(t.name) }" v-for="t in types" :key="t.id">
+          <input v-model="checked" type="checkbox" :id="t.name" :value="t.name" />
           <label :for="t.name" class="h-100 w-100">
             <div class="cs-card h-100 w-100 d-flex justify-content-center">
               <figure class="h-100 w-100 px-5">
-                <img
-                  :src="t.image"
-                  :alt="t.name"
-                  class="w-100 h-100"
-                  :class="{ activeTop: checked.includes(t.name) }" />
-                <figcaption
-                  class="bg-light"
-                  :class="{ activeBottom: checked.includes(t.name) }">
+                <img :src="t.image" :alt="t.name" class="w-100 h-100" :class="{ activeTop: checked.includes(t.name) }" />
+                <figcaption class="bg-light" :class="{ activeBottom: checked.includes(t.name) }">
                   {{ t.name }}
                 </figcaption>
               </figure>
@@ -86,13 +78,49 @@ export default {
       </div>
 
       <div class="d-flex justify-content-center my-3">
-        <RouterLink
-          class="btn btn-success py-1 px-3 fs-5"
-          :to="{ name: 'restaurants', query: { types: checked } }">
+        <RouterLink class="btn btn-success py-1 px-3 fs-5" :to="{ name: 'restaurants', query: { types: checked } }">
           <font-awesome-icon icon="fa-solid fa-utensils" class="me-2" />
           Conferma le tue selezioni
         </RouterLink>
       </div>
+    </div>
+  </section>
+
+  <section id="app">
+    <div class="container my-5">
+      <div class="row d-flex justify-content-between align-items-center my-5">
+        <div class="col-12 col-sm-5 col-md-4 col-lg-4">
+          <figure>
+            <img class="w-50" :src="buildImagePath('cell.jpg')" alt="">
+          </figure>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+          <div>
+            <h1 class="fw-bolder text-light">Il bello è prenderci gusto</h1>
+            <p class="text-light">Scarica l'app di Deliveboo e ordina dove vuoi, qualunque cosa desideri.</p>
+          </div>
+          <div class="group-button d-flex gap-2">
+            <div class="btn bg-dark d-flex align-items-center gap-3">
+              <font-awesome-icon icon="fa-brands fa-apple" class="text-light fa-2x" />
+              <div class="d-flex flex-column">
+                <span class="text-light">Scarica su</span>
+                <a class="text-light text-decoration-none" href="#">App Store</a>
+              </div>
+            </div>
+            <div>
+              <div class="btn bg-dark d-flex align-items-center gap-3">
+                <font-awesome-icon icon="fa-brands fa-google-play" class="text-light" />
+                <div class="d-flex flex-column">
+                  <span class="text-light">Scarica su</span>
+                  <a class="text-light text-decoration-none" href="#">App Store</a>
+                </div>
+              </div>
+            </div>
+            <div class="btn-small bg-dark"></div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -169,5 +197,10 @@ export default {
 .activeBottom {
   box-shadow: -10px 10px 10px -10px #e5c68b, 10px 10px 10px -10px #e5c68b,
     0px 0px 10px #e5c68b;
+}
+
+span {
+  font-size: .5rem;
+  align-self: start;
 }
 </style>
