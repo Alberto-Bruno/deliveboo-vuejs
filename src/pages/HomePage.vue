@@ -30,7 +30,10 @@ export default {
       const url = new URL(`../assets/img/${image}`,
         import.meta.url);
       return url.href;
-    }
+    },
+    intoView(element) {
+      this.$refs[element].scrollIntoView();
+    },
   },
   created() {
     this.getType();
@@ -53,15 +56,13 @@ export default {
       <div class="text-center">
         <p class="text-light fw-4 fs-4 m-0">
           Scegli le tue tipologie
-          <a href="#types-restaurant" id="arrow-types">
-            <font-awesome-icon icon="fa-solid fa-arrow-down" class="fs-2" />
-          </a>
-
+          <font-awesome-icon icon="fa-solid fa-arrow-down" class="fs-2" @click="intoView('types-restaurant')"
+            role="button" />
         </p>
       </div>
 
       <div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 mb-5 mt-3 d-flex justify-content-center"
-        id="types-restaurant">
+        ref="types-restaurant">
         <div class="col my-5" :class="{ checked: checked.includes(t.name) }" v-for="t in types" :key="t.id">
           <input v-model="checked" type="checkbox" :id="t.name" :value="t.name" />
           <label :for="t.name" class="h-100 w-100">
@@ -94,7 +95,7 @@ export default {
             <img class="w-50" :src="buildImagePath('cell.jpg')" alt="">
           </figure>
         </div>
-        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-5">
           <div>
             <h1 class="fw-bolder text-light">Il bello è prenderci gusto</h1>
             <p class="text-light">Scarica l'app di Deliveboo e ordina dove vuoi, qualunque cosa desideri.</p>
@@ -109,10 +110,10 @@ export default {
             </div>
             <div>
               <div class="btn bg-dark d-flex align-items-center gap-3">
-                <font-awesome-icon icon="fa-brands fa-google-play" class="text-light" />
+                <font-awesome-icon icon="fa-brands fa-google-play" class="text-light fa-2x" />
                 <div class="d-flex flex-column">
                   <span class="text-light">Scarica su</span>
-                  <a class="text-light text-decoration-none" href="#">App Store</a>
+                  <a class="text-light text-decoration-none" href="#">Google Play</a>
                 </div>
               </div>
             </div>
