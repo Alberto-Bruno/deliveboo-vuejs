@@ -60,9 +60,7 @@ export default {
           <h6 class="fw-bold">Cucine</h6>
           <ul>
             <li v-for="t in types" :key="t.id">
-              <router-link
-                class="text-capitalize"
-                :to="{ name: 'restaurants', query: { types: t.name } }">
+              <router-link class="text-capitalize" :to="{ name: 'restaurants', query: { types: t.name } }">
                 {{ t.name }}
               </router-link>
             </li>
@@ -72,9 +70,7 @@ export default {
           <h6 class="fw-bold">Ristoranti</h6>
           <ul>
             <li v-for="restaurant in restaurants" :key="restaurant.id">
-              <router-link
-                class="text-capitalize"
-                :to="{ name: 'restaurants' }">
+              <router-link class="text-capitalize" :to="{ name: 'restaurants' }">
                 {{ restaurant.name }}
               </router-link>
             </li>
@@ -99,10 +95,7 @@ export default {
         <div class="col-md-4">
           <div class="logo">
             <figure class="m-0">
-              <img
-                class="logo-boo"
-                src="https://d92mrp7hetgfk.cloudfront.net/images/sites/misc/Boolean/original.png?1623187562"
-                alt="" />
+              <img class="logo-boo" src="../assets/img/icon-logo.jpg" alt="" />
             </figure>
           </div>
           <div class="greetings">
@@ -121,12 +114,8 @@ export default {
             <strong>Seguici su:</strong>
           </div>
           <div class="social-media p-3">
-            <a href="#"
-              ><i class="fa-brands fa-facebook text-black me-2"></i
-            ></a>
-            <a href="#"
-              ><i class="fa-brands fa-instagram text-black me-2"></i
-            ></a>
+            <a href="#"><i class="fa-brands fa-facebook text-black me-2"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram text-black me-2"></i></a>
             <a href="#"><i class="fa-brands fa-twitter text-black me-2"></i></a>
           </div>
         </div>

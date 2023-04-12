@@ -133,9 +133,9 @@ export default {
 
 .jumbo {
   height: 350px;
-  background-image: url("../assets/img/photo_2023-04-11_09.20.16.jpeg");
+  background-image: url("../assets/img/Hamb-jumbotron.png");
   background-size: cover;
-  background-position-y: 25%;
+  background-position-y: 100%;
   background-position-x: 50%;
 }
 
