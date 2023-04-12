@@ -12,8 +12,18 @@ export default {
       typesFilter: this.$route.query.types,
     };
   },
+  watch: {
+    "$route.query.types"(newQuery, oldQuery) {
+      if (newQuery != oldQuery) {
+        this.typesFilter = this.$route.query.types;
+        this.getRestaurants();
+        this.$refs.container.scrollIntoView();
+      }
+    },
+  },
   methods: {
     getRestaurants() {
+      this.restaurants = [];
       this.isLoading = true;
       const query = {
         params: {
@@ -23,34 +33,28 @@ export default {
       axios
         .get(apiBase, query)
         .then((res) => {
-
           this.restaurants = res.data.restaurants;
         })
         .catch((err) => {
           this.$router.push({ name: "not-found" });
-        }).then(() => {
+        })
+        .then(() => {
           this.isLoading = false;
         });
     },
 
-    getRestaurantTypes (types) {
-      let t= '';
+    getRestaurantTypes(types) {
+      let t = "";
       types.forEach((type) => {
-        t += type.name + ', ';
-      
+        t += type.name + ", ";
       });
       return t.slice(0, -2);
-
-
     },
 
     getImageRestaurants(restaurant) {
       if (restaurant.image) return restaurant.image;
       return restaurant.types[0].image;
-    }
-
-
-
+    },
   },
   mounted() {
     this.getRestaurants();
@@ -61,31 +65,46 @@ export default {
 
 <template>
   <section>
-
-
     <app-loader v-if="isLoading" label="Sto cercando">
-      <div class="container py-4 justify-content-center d-flex flex-column align-items-center" ref="container">
-        <font-awesome-icon icon="fa-solid fa-bolt-lightning" class="fa-4x my-5 fa-beat text-light"></font-awesome-icon>
+      <div
+        class="container py-4 justify-content-center d-flex flex-column align-items-center"
+        ref="container">
+        <font-awesome-icon
+          icon="fa-solid fa-bolt-lightning"
+          class="fa-4x my-5 fa-beat text-light"></font-awesome-icon>
         <h1 class="text-white text-center mb-4">Sto cercando i ristoranti</h1>
       </div>
     </app-loader>
-    <div v-else class="container py-4 justify-content-center d-flex flex-column align-items-center" ref="container">
-      <h1 v-if="restaurants.length" class="text-white text-center mb-4">Ristoranti Trovati</h1>
-      <h1 v-else class="text-white text-center my-4">Non ci sono ristoranti che corrispondono alla tua ricerca</h1>
+    <div
+      v-else
+      class="container py-4 justify-content-center d-flex flex-column align-items-center"
+      ref="container">
+      <h1 v-if="restaurants.length" class="text-white text-center mb-4">
+        Ristoranti Trovati
+      </h1>
+      <h1 v-else class="text-white text-center my-4">
+        Non ci sono ristoranti che corrispondono alla tua ricerca
+      </h1>
       <div class="my-2 align-self-start pb-4">
-        <RouterLink :to="{ name: 'home' }" class="d-flex align-items-center gap-2">
+        <RouterLink
+          :to="{ name: 'home' }"
+          class="d-flex align-items-center gap-2">
           <i class="fa-solid fa-arrow-left fa-2x text-green"></i>
-
         </RouterLink>
       </div>
 
-
       <div class="card-deck">
-        <div v-for="restaurant in restaurants" :key="restaurant.id" class="card mb-3">
+        <div
+          v-for="restaurant in restaurants"
+          :key="restaurant.id"
+          class="card mb-3">
           <div class="row no-gutters">
             <div class="col-md-4 img-section">
               <a href="#">
-                <img :src="getImageRestaurants(restaurant)" class="card-img h-100" :alt="restaurant.name" />
+                <img
+                  :src="getImageRestaurants(restaurant)"
+                  class="card-img h-100"
+                  :alt="restaurant.name" />
               </a>
             </div>
             <div class="col-md-8">
@@ -102,8 +121,8 @@ export default {
                     <h5 class="card-title fw-bold">
                       Costo di consegna:<span class="txt-light">{{
                         restaurant.delivery_cost === "0.00"
-                        ? " Gratis"
-                        : "€ " + restaurant.delivery_cost
+                          ? " Gratis"
+                          : "€ " + restaurant.delivery_cost
                       }}</span>
                     </h5>
 
@@ -111,18 +130,19 @@ export default {
                       Ordine Minimo:<span class="txt-light">
                         {{
                           restaurant.min_order
-                          ? "€" + restaurant.min_order
-                          : " -"
-                        }}</span>
+                            ? "€" + restaurant.min_order
+                            : " -"
+                        }}</span
+                      >
                     </h5>
                     <div class="d-flex">
                       <h5 class="fw-bold me-2">Tipologia:</h5>
                       <div class="type-span">
-                        <span class="me-2 " > {{ getRestaurantTypes(restaurant.types) }} </span>
-
+                        <span class="me-2">
+                          {{ getRestaurantTypes(restaurant.types) }}
+                        </span>
                       </div>
                     </div>
-
                   </div>
                 </div>
               </div>
