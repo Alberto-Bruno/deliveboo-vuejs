@@ -49,54 +49,41 @@ export default {
                 <div class="col">
                     <h6 class="fw-bold">Servizio Clienti</h6>
                     <ul>
-                        <a href="#">
-                            <li>Domande frequenti</li>
-                        </a>
-                        <a href="#">
-                            <li>Accedi</li>
-                        </a>
-                        <a href="#">
-                            <li>Registrati</li>
-                        </a>
-                        <a href="#">
-                            <li>Scarica l'app</li>
-                        </a>
+                        <li><a href="#">Domande frequenti</a></li>
+                        <li><a href="#">Accedi</a></li>
+                        <li><a href="#">Registrati</a></li>
+                        <li><a href="#">Scarica l'app</a></li>
                     </ul>
                 </div>
                 <div class="col">
                     <h6 class="fw-bold">Cucine</h6>
                     <ul>
-                        <a class="text-capitalize" v-for="t in types" :key="t.id" href="#">
-                            <li>{{ t.name }}</li>
-                        </a>
+                        <li v-for="t in types" :key="t.id">
+                            <router-link class="text-capitalize" :to="{ name: 'restaurants', query: { types: t.name } }">
+                                {{ t.name }}
+                            </router-link>
+                        </li>
                     </ul>
                 </div>
                 <div class="col">
                     <h6 class="fw-bold">Ristoranti</h6>
                     <ul>
-                        <a v-for="restaurant in restaurants" :key="restaurant.id" href="#">
-                            <li>{{ restaurant.name }}</li>
-                        </a>
+                        <li v-for="restaurant in restaurants" :key="restaurant.id">
+                            <router-link class="text-capitalize"
+                                :to="{ name: 'restaurants', params: { id: restaurant.name } }">
+                                {{ restaurant.name }}
+                            </router-link>
+                        </li>
                     </ul>
                 </div>
                 <div class="col">
                     <h6 class="fw-bold">Chi siamo</h6>
                     <ul>
-                        <a href="#">
-                            <li>Informazioni</li>
-                        </a>
-                        <a href="#">
-                            <li>Lavora con noi</li>
-                        </a>
-                        <a href="#">
-                            <li>Sostenibilità</li>
-                        </a>
-                        <a href="#">
-                            <li>Informazioni legali</li>
-                        </a>
-                        <a href="#">
-                            <li>Termini e condizioni</li>
-                        </a>
+                        <li><a href="#">Informazioni</a></li>
+                        <li><a href="#">Lavora con noi</a></li>
+                        <li><a href="#">Sotenibilità</a></li>
+                        <li><a href="#">Informazioni legali</a></li>
+                        <li><a href="#">Termini e condizioni</a></li>
                     </ul>
                 </div>
             </div>
