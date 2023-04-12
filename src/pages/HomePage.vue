@@ -13,7 +13,7 @@ export default {
   }),
   watch: {
     checked(newValue) {
-      this.$route.query.types = newValue;
+      this.$router.push({ path: "/", query: { types: newValue } });
     },
   },
   methods: {
@@ -39,6 +39,7 @@ export default {
   },
   created() {
     this.getType();
+    if (this.$route.query.types) this.checked = this.$route.query.types;
   },
 };
 </script>
@@ -54,16 +55,30 @@ export default {
         </p>
       </div>
 
-      <div class="row align-items-stretch d-flex justify-content-center flex-wrap g-4 my-5 py-5" ref="types-restaurant">
-        <div class="check-col col-lg-2 col-md-4 col-sm-5 col-8" :class="{ checked: checked.includes(t.name) }"
-          v-for="t in types" :key="t.id">
-          <input v-model="checked" type="checkbox" :id="t.name" :value="t.name" />
+      <div
+        class="row align-items-stretch d-flex justify-content-center flex-wrap g-4 my-5 py-5"
+        ref="types-restaurant">
+        <div
+          class="check-col col-lg-2 col-md-4 col-sm-5 col-8"
+          :class="{ checked: checked.includes(t.name) }"
+          v-for="t in types"
+          :key="t.id">
+          <input
+            v-model="checked"
+            type="checkbox"
+            :id="t.name"
+            :value="t.name" />
           <label :for="t.name" class="h-100 w-100">
             <div class="cs-card d-flex flex-column h-100">
               <figure class="m-0 h-75">
-                <img :src="t.image" :alt="t.name" class="h-100 w-100" :class="{ activeTop: checked.includes(t.name) }" />
+                <img
+                  :src="t.image"
+                  :alt="t.name"
+                  class="h-100 w-100"
+                  :class="{ activeTop: checked.includes(t.name) }" />
               </figure>
-              <figcaption class="bg-light  h-25 d-flex align-items-center justify-content-center"
+              <figcaption
+                class="bg-light h-25 d-flex align-items-center justify-content-center"
                 :class="{ activeBottom: checked.includes(t.name) }">
                 <h5>{{ t.name }}</h5>
               </figcaption>
@@ -73,7 +88,7 @@ export default {
       </div>
     </div>
   </section>
-  <restaurants-page :types="checked"></restaurants-page>
+  <restaurants-page></restaurants-page>
   <section id="app">
     <div class="container my-5">
       <div class="row d-flex justify-content-between align-items-center my-5">
@@ -92,18 +107,26 @@ export default {
           </div>
           <div class="group-button d-flex gap-2">
             <div class="btn bg-dark d-flex align-items-center gap-3">
-              <font-awesome-icon icon="fa-brands fa-apple" class="text-light fa-2x" />
+              <font-awesome-icon
+                icon="fa-brands fa-apple"
+                class="text-light fa-2x" />
               <div class="d-flex flex-column">
                 <span class="text-light">Scarica su</span>
-                <a class="text-light text-decoration-none" href="#">App Store</a>
+                <a class="text-light text-decoration-none" href="#"
+                  >App Store</a
+                >
               </div>
             </div>
             <div>
               <div class="btn bg-dark d-flex align-items-center gap-3">
-                <font-awesome-icon icon="fa-brands fa-google-play" class="text-light fa-2x" />
+                <font-awesome-icon
+                  icon="fa-brands fa-google-play"
+                  class="text-light fa-2x" />
                 <div class="d-flex flex-column">
                   <span class="text-light">Scarica su</span>
-                  <a class="text-light text-decoration-none" href="#">Google Play</a>
+                  <a class="text-light text-decoration-none" href="#"
+                    >Google Play</a
+                  >
                 </div>
               </div>
             </div>
@@ -140,7 +163,6 @@ export default {
   position: relative;
   height: 200px;
 
-
   input {
     position: absolute;
     top: 50%;
@@ -156,7 +178,6 @@ export default {
     border-top-right-radius: 5%;
     border-top-left-radius: 5%;
   }
-
 }
 
 figcaption {
@@ -165,7 +186,6 @@ figcaption {
   text-align: center;
   text-transform: capitalize;
   font-weight: 500;
-
 }
 
 .cs-card:hover figcaption {
@@ -192,9 +212,7 @@ span {
   align-self: start;
 }
 
-
 @media (max-width: 575px) {
-
   .cs-card {
     figcaption {
       h5 {

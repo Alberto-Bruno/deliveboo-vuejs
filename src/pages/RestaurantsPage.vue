@@ -12,9 +12,8 @@ export default {
       typesFilter: [],
     };
   },
-  props: { types: Array },
   watch: {
-    types(newQuery) {
+    "$route.query.types"(newQuery) {
       this.typesFilter = newQuery;
       this.getRestaurants();
     },
@@ -53,6 +52,12 @@ export default {
       if (restaurant.image) return restaurant.image;
       return restaurant.types[0].image;
     },
+  },
+  mounted() {
+    if (this.$route.query.types) {
+      this.typesFilter = this.$route.query.types;
+      this.getRestaurants();
+    }
   },
 };
 </script>
