@@ -117,8 +117,8 @@ export default {
                     </h5>
                     <div class="d-flex">
                       <h5 class="fw-bold me-2">Tipologia:</h5>
-                      <div>
-                        <span class="me-2" > {{ getRestaurantTypes(restaurant.types) }} </span>
+                      <div class="type-span">
+                        <span class="me-2 " > {{ getRestaurantTypes(restaurant.types) }} </span>
 
                       </div>
                     </div>
@@ -145,6 +145,9 @@ a {
   margin-left: 20px;
 }
 
+.type-span {
+  padding-top: 1px;
+}
 
 .card {
   max-width: 900px;
