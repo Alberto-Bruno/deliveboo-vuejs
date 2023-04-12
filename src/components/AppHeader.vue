@@ -43,7 +43,7 @@ export default {
   font-size: 25px;
 
   .green-title {
-    color: $primary-color;
+    color: $bg-primary;
   }
 
   .blue-title {
