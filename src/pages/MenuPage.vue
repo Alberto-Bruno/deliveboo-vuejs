@@ -76,6 +76,14 @@ export default {
   min-height: 48px;
 }
 
+.card {
+  cursor: pointer;
+}
+.card:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease-in-out;
+}
+
 @media (min-width: 1440px) {
   .card {
     width: 700px;
