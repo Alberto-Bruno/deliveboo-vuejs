@@ -3,7 +3,6 @@ import { createRouter, createWebHistory } from "vue-router";
 
 // importo le pagine che voglio usare
 import HomePage from "../pages/HomePage.vue";
-import RestaurantsPage from "../pages/RestaurantsPage.vue";
 import NotFoundPage from "../pages/NotFoundPage.vue";
 import MenuPage from "../pages/MenuPage.vue";
 
@@ -15,21 +14,6 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: HomePage,
-    },
-    {
-      path: "/restaurants/:slug",
-      name: "menu",
-      component: MenuPage,
-    },
-    {
-      path: "/restaurants/:slug",
-      name: "menu",
-      component: MenuPage,
-    },
-    {
-      path: "/restaurants/:slug",
-      name: "menu",
-      component: MenuPage,
     },
     {
       path: "/restaurants/:slug",
