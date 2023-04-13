@@ -72,7 +72,9 @@ export default {
   min-height: 48px;
 }
 
-.card {
-  width: 700px;
+@media (min-width: 1440px) {
+  .card {
+    width: 700px;
+  }
 }
 </style>
