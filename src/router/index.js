@@ -21,6 +21,11 @@ const router = createRouter({
       name: "menu",
       component: MenuPage,
     },
+    {
+      path: "/restaurants/:slug",
+      name: "menu",
+      component: MenuPage,
+    },
 
     { path: "/:pathMatch(.*)*", name: "not-found", component: NotFoundPage },
   ],
