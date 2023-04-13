@@ -28,7 +28,7 @@ export default {
 
 <template>
   <div class="container py-4">
-    <h1 class="text-center text-white mb-5">{{ restaurant.name }} Menù</h1>
+    <h1 class="text-center text-white mb-5">"{{ restaurant.name }}" Menù</h1>
     <div class="row d-flex flex-column align-items-center">
       <div class="col-6 mb-4" v-for="dish in dishes" :key="dish.id">
         <div class="card h-100">
