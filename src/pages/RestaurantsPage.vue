@@ -72,23 +72,27 @@ export default {
     <app-loader v-if="isLoading" label="Sto cercando">
       <div
         class="container py-4 justify-content-center d-flex flex-column align-items-center"
-        ref="container">
+        ref="container"
+      >
         <font-awesome-icon
           icon="fa-solid fa-bolt-lightning"
-          class="fa-4x my-5 fa-beat text-light"></font-awesome-icon>
+          class="fa-4x my-5 fa-beat text-light"
+        ></font-awesome-icon>
         <h1 class="text-white text-center mb-4">Sto cercando i ristoranti</h1>
       </div>
     </app-loader>
     <div
       v-else
       class="container py-4 justify-content-center d-flex flex-column align-items-center"
-      ref="container">
+      ref="container"
+    >
       <h1 v-if="restaurants.length" class="text-white text-center mb-4">
         Ristoranti Trovati
       </h1>
       <h1
         v-else-if="!restaurants.length && typesFilter.length"
-        class="text-white text-center my-4">
+        class="text-white text-center my-4"
+      >
         Non sono stati trovati ristoranti che soddisfano i tuoi criteri
       </h1>
       <h1 v-else class="text-white text-center my-4">
@@ -99,21 +103,27 @@ export default {
         <div
           v-for="restaurant in restaurants"
           :key="restaurant.id"
-          class="card mb-3">
+          class="card mb-3"
+        >
           <div class="row no-gutters">
             <div class="col-md-4 img-section">
               <a href="#">
                 <img
                   :src="getImageRestaurants(restaurant)"
                   class="card-img h-100"
-                  :alt="restaurant.name" />
+                  :alt="restaurant.name"
+                />
               </a>
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <a href="#">
-                  <h3 class="card-title mb-4 fw-bold">{{ restaurant.name }}</h3>
-                </a>
+                <h3 class="card-title mb-4 fw-bold menu-page">
+                  <router-link
+                    :to="{ name: 'menu', params: { slug: restaurant.slug } }"
+                  >
+                    {{ restaurant.name }}
+                  </router-link>
+                </h3>
                 <div class="row">
                   <div class="col-md-6">
                     <h5 class="card-title mb-2">{{ restaurant.address }}</h5>
