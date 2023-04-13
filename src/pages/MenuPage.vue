@@ -9,7 +9,9 @@ export default {
       dishes: [],
     };
   },
+
   mounted() {
+    this.$refs.myFocus.focus();
     const slug = this.$route.params.slug;
     // console.log(slug);
 
@@ -28,7 +30,7 @@ export default {
 
 <template>
   <div class="container py-4">
-    <h1 class="text-center text-white mb-5">
+    <h1 class="text-center text-white mb-5" ref="myFocus">
       Il Menù di "{{ restaurant.name }}"
     </h1>
     <div class="row d-flex flex-column align-items-center">
