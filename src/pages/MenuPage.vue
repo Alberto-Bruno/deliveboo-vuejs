@@ -30,12 +30,19 @@ export default {
   <div class="container py-4">
     <h1 class="text-center text-white mb-5">{{ restaurant.name }} Menù</h1>
     <div class="row d-flex flex-column align-items-center">
-      <div class="col-5 mb-4" v-for="dish in dishes" :key="dish.id">
-        <div class="card h-100" style="max-width: 540px">
+      <div class="col-6 mb-4" v-for="dish in dishes" :key="dish.id">
+        <div class="card h-100">
           <div class="row g-0">
             <div class="col-md-4">
               <img
+                v-if="dish.image"
                 :src="dish.image"
+                class="img-fluid rounded-start"
+                alt="..."
+              />
+              <img
+                v-else
+                src="https://www.salepepe.it/files/2019/06/cibo-spazzatura-@salepepe.jpg"
                 class="img-fluid rounded-start"
                 alt="..."
               />
@@ -63,5 +70,9 @@ export default {
 
 .card-title {
   min-height: 48px;
+}
+
+.card {
+  width: 700px;
 }
 </style>
