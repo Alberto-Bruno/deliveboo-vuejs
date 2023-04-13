@@ -43,15 +43,15 @@ export default {
               Home
             </RouterLink>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="http://127.0.0.1:8000/dashboard"
               >Dashboard</a
             >
-          </li>
+          </li> -->
         </ul>
 
         <a
-          class="btn btn-success log-btn py-1 px-3"
+          class="btn btn-danger log-btn py-1 px-3"
           href="http://127.0.0.1:8000/login"
           >Login | Registrati</a
         >

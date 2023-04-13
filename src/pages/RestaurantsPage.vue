@@ -107,13 +107,15 @@ export default {
         >
           <div class="row no-gutters">
             <div class="col-md-4 img-section">
-              <a href="#">
+              <router-link
+                :to="{ name: 'menu', params: { slug: restaurant.slug } }"
+              >
                 <img
                   :src="getImageRestaurants(restaurant)"
                   class="card-img h-100"
                   :alt="restaurant.name"
                 />
-              </a>
+              </router-link>
             </div>
             <div class="col-md-8">
               <div class="card-body">
