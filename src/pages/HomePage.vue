@@ -45,7 +45,10 @@ export default {
   mounted() {
     this.getType();
     if (this.$route.query.types) {
-      this.checked = this.$route.query.types;
+      this.checked =
+        typeof this.$route.query.types == "string"
+          ? [this.$route.query.types]
+          : this.$route.query.types;
     }
   },
 };
