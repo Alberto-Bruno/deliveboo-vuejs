@@ -7,24 +7,58 @@ export default {
     return {
       restaurant: {},
       dishes: [],
+      cartDishes: [],
     };
+  },
+  watch: {
+    cartDishes: {
+      handler(newValue) {
+        if (this.addToLocalCart()) {
+          localStorage.setItem("cartDishes", JSON.stringify(newValue));
+          console.log(localStorage.getItem("cartDishes"));
+        }
+      },
+      deep: true,
+    },
   },
   methods: {
     addToCart(dish) {
-      if (!dish.hasOwnProperty("quantity")) {
-        dish.quantity = 1;
-      }
+      dish.quantity = 1;
       dish.addedToCart = true;
+      const cartDish = { name: dish.name, quantity: dish.quantity };
+      this.cartDishes.push(cartDish);
+      this.addToLocalCart();
     },
     incrementQuantity(dish) {
       dish.quantity++;
+      const cartDish = this.cartDishes.find((cartDish) => {
+        return cartDish.name === dish.name;
+      });
+      cartDish.quantity++;
     },
     decrementQuantity(dish) {
+      const cartDish = this.cartDishes.find((cartDish) => {
+        return cartDish.name === dish.name;
+      });
       if (dish.quantity > 1) {
         dish.quantity--;
+        cartDish.quantity--;
       } else {
         dish.addedToCart = false;
+        dish.quantity = 0;
+        const i = this.cartDishes.indexOf(cartDish);
+        this.cartDishes.splice(i, 1);
       }
+    },
+    addToLocalCart() {
+      const restaurantName = this.restaurant.slug;
+      if (!localStorage.getItem("restaurantName")) {
+        localStorage.setItem("restaurantName", restaurantName);
+      } else if (localStorage.getItem("restaurantName") !== restaurantName) {
+        console.error("Non puoi effettuare ordini da ristoranti diversi!");
+        return false;
+      }
+      return true;
     },
   },
   mounted() {
@@ -39,7 +73,7 @@ export default {
           return {
             ...dish,
             addedToCart: false,
-            quantity: 1,
+            quantity: 0,
           };
         });
       })
@@ -63,14 +97,12 @@ export default {
                 v-if="dish.image"
                 :src="dish.image"
                 class="img-fluid rounded h-100"
-                alt="..."
-              />
+                alt="..." />
               <img
                 v-else
                 src="https://www.salepepe.it/files/2019/06/cibo-spazzatura-@salepepe.jpg"
                 class="img-fluid rounded-start"
-                alt="..."
-              />
+                alt="..." />
             </div>
             <div class="col-md-8">
               <div class="card-body">
@@ -81,25 +113,21 @@ export default {
                   <button
                     v-if="!dish.addedToCart"
                     class="btn btn-primary"
-                    @click="dish.addedToCart = true"
-                  >
+                    @click="addToCart(dish)">
                     Aggiungi al carrello
                   </button>
                   <div
                     v-if="dish.addedToCart"
-                    class="d-flex align-items-center"
-                  >
+                    class="d-flex align-items-center">
                     <button
                       class="btn btn-danger me-2"
-                      @click="decrementQuantity(dish)"
-                    >
+                      @click="decrementQuantity(dish)">
                       -
                     </button>
                     <span id="counter" class="me-2">{{ dish.quantity }}</span>
                     <button
                       class="btn btn-success"
-                      @click="incrementQuantity(dish)"
-                    >
+                      @click="incrementQuantity(dish)">
                       +
                     </button>
                   </div>
