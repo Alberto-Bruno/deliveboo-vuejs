@@ -60,13 +60,20 @@ export default {
     <div class="container">
       <div class="section-header my-5">
         <h1 class="fw-bolder text-light">Le cucine più amate</h1>
-        <p class="text-light my-3">
+        <h5 class="text-light">
           Trova le cucine più amate dai ristoranti e ordina online a domicilio.
-        </p>
+        </h5>
+
+        <h1
+          v-if="checked.length === 0 && !loading"
+          class="text-white text-center mt-5"
+        >
+          Seleziona almeno una tipologia per inziare la ricerca!
+        </h1>
       </div>
 
       <div
-        class="row align-items-stretch d-flex justify-content-center flex-wrap g-4 my-5 py-5"
+        class="row align-items-stretch d-flex justify-content-center flex-wrap g-4 mb-5 pb-5"
         ref="types-restaurant"
       >
         <div
