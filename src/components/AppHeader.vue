@@ -7,54 +7,41 @@ export default {
 <template>
   <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
-      <RouterLink
-        class="navbar-brand d-flex align-items-center"
-        id="navbar"
-        :to="{ name: 'home' }"
-      >
+      <RouterLink class="navbar-brand d-flex align-items-center" id="navbar" :to="{ name: 'home' }">
         <figure class="m-0">
-          <img
-            class="logo-nav position-static"
-            src="../assets/img/icon-logo.jpg"
-            alt=""
-          />
+          <img class="logo-nav position-static" src="../assets/img/icon-logo.jpg" alt="" />
         </figure>
-        <span class="green-title fw-bold">Delive</span
-        ><span class="blue-title fw-bold">Boo</span>
+        <span class="green-title fw-bold">Delive</span><span class="blue-title fw-bold">Boo</span>
       </RouterLink>
 
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="{{ __('Toggle navigation') }}"
-      >
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Left Side Of Navbar -->
         <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <RouterLink :to="{ name: 'home' }" class="nav-link">
-              Home
-            </RouterLink>
+        <li class="nav-item">
+          <RouterLink :to="{ name: 'home' }" class="nav-link">
+            Home
+          </RouterLink>
           </li>
           <!-- <li class="nav-item">
             <a class="nav-link" href="http://127.0.0.1:8000/dashboard"
-              >Dashboard</a
+            >Dashboard</a
             >
-          </li> -->
+            </li> -->
         </ul>
-
-        <a
-          class="btn btn-danger log-btn py-1 px-3"
-          href="http://127.0.0.1:8000/login"
-          >Login | Registrati</a
-        >
+        <div class="d-flex gap-4">
+          <a class="btn btn-danger log-btn py-1 px-3" href="http://127.0.0.1:8000/login">
+            <font-awesome-icon icon="fa-solid fa-user"></font-awesome-icon>
+          </a>
+          <a class="btn btn-danger log-btn py-1 px-3 cart" href="http://127.0.0.1:8000/login">
+            <font-awesome-icon icon="fa-solid fa-cart-shopping"></font-awesome-icon>
+            <div class="cart-badge">1</div>
+          </a>
+        </div>
         <!-- Right Side Of Navbar -->
       </div>
     </div>
@@ -66,24 +53,39 @@ export default {
 
 #navbar {
   font-size: 25px;
+}
 
-  .green-title {
-    color: $bg-primary;
-  }
+.green-title {
+  color: $bg-primary;
+}
 
-  .blue-title {
-    color: $secondary-color;
-  }
+.blue-title {
+  color: $secondary-color;
+}
 
-  .logo-nav {
-    height: 50px;
-    position: relative;
-    top: 8px;
-    // margin-top: 15px;
-  }
+.logo-nav {
+  height: 50px;
+  position: relative;
+  top: 8px;
+  // margin-top: 15px;
+}
 
-  .log-btn {
-    font-size: 17px;
+.log-btn {
+  font-size: 1.09rem;
+  position: relative;
+
+  .cart-badge {
+    position: absolute;
+    top: -1%;
+    right: 3%;
+    background-color: black;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    color: #ffffff;
+    width: 18px;
+    height: 18px;
   }
 }
 </style>
