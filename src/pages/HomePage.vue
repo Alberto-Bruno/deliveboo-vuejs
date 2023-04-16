@@ -64,11 +64,11 @@ export default {
           Trova le cucine più amate dai ristoranti e ordina online a domicilio.
         </h5>
 
-        <h1
-          v-if="checked.length === 0 && !loading"
-          class="text-white text-center mt-5"
-        >
+        <h1 v-if="checked.length === 0" class="text-white text-center mt-5">
           Seleziona almeno una tipologia per inziare la ricerca!
+        </h1>
+        <h1 v-else class="text-white text-center mt-5">
+          Seleziona un ristorante e scopri il suo menù!
         </h1>
       </div>
 
