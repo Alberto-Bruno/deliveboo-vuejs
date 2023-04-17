@@ -1,5 +1,6 @@
 import { reactive } from 'vue';
 
 export const store = reactive({
-    cartQuantity: 0,
+
+    cartQuantity: JSON.parse(localStorage.getItem("cartDishes")) ? JSON.parse(localStorage.getItem("cartDishes")).length : 0
 });
