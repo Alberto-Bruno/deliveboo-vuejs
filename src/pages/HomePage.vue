@@ -65,10 +65,10 @@ export default {
         </h5>
 
         <h1 v-if="checked.length === 0" class="text-white text-center mt-5">
-          Seleziona i tuoi piatti
+          Scopri i menù dei nostri ristoranti
         </h1>
         <h1 v-else class="text-white text-center mt-5">
-          Seleziona un ristorante e scopri il suo menù!
+          Seleziona un ristorante che preferisci!
         </h1>
       </div>
 
