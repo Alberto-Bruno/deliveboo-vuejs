@@ -20,6 +20,7 @@ export default {
   }),
   methods: {
     sendForm() {
+      this.form.payment_status = 1;
       return console.log(this.form);
       axios
         .post(apiBase, this.form)
