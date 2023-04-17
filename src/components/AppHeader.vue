@@ -45,18 +45,12 @@ export default {
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <!-- Left Side Of Navbar -->
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
             <RouterLink :to="{ name: 'home' }" class="nav-link">
               Home
             </RouterLink>
           </li>
-          <!-- <li class="nav-item">
-                                                                <a class="nav-link" href="http://127.0.0.1:8000/dashboard"
-                                                                >Dashboard</a
-                                                                >
-                                                                </li> -->
         </ul>
         <div class="d-flex gap-4">
           <a
@@ -80,6 +74,7 @@ export default {
             </div>
           </RouterLink>
         </div>
+
         <!-- Right Side Of Navbar -->
       </div>
     </div>
