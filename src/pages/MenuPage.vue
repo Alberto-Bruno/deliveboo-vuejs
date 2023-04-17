@@ -17,7 +17,6 @@ export default {
           localStorage.setItem("cartDishes", JSON.stringify(newValue));
           if (!JSON.parse(localStorage.getItem("cartDishes")).length)
             localStorage.clear();
-          console.log(localStorage);
         }
       },
       deep: true,
@@ -27,7 +26,7 @@ export default {
     addToCart(dish) {
       dish.quantity = 1;
       dish.addedToCart = true;
-      const cartDish = { name: dish.name, quantity: dish.quantity };
+      const cartDish = { ...dish };
       this.cartDishes.push(cartDish);
       this.addToLocalCart();
     },
@@ -62,6 +61,24 @@ export default {
       }
       return true;
     },
+    setCartDishes() {
+      const localRestaurantName = localStorage.getItem("restaurantName");
+      if (
+        localRestaurantName &&
+        localRestaurantName === this.restaurant.slug &&
+        localStorage.getItem("cartDishes")
+      ) {
+        const localCartDishes = JSON.parse(localStorage.getItem("cartDishes"));
+        localCartDishes.forEach((localDish) => {
+          const dish = this.dishes.find((dish) => {
+            return dish.id === localDish.id;
+          });
+          dish.quantity = localDish.quantity;
+          dish.addedToCart = true;
+          this.cartDishes.push({ ...dish });
+        });
+      }
+    },
   },
   mounted() {
     this.$refs.myFocus.focus();
@@ -78,6 +95,7 @@ export default {
             quantity: 0,
           };
         });
+        this.setCartDishes();
       })
       .catch((err) => {
         console.log(err);
