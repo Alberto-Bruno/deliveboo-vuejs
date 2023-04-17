@@ -62,7 +62,7 @@ export default {
     },
   },
   mounted() {
-    this.$refs.myFocus.focus();
+    // this.$refs.myFocus.focus();
     const slug = this.$route.params.slug;
 
     axios
@@ -81,11 +81,14 @@ export default {
         console.log(err);
       });
   },
+  // created() {
+  //   console.log(this.$route.params.slug);
+  // },
 };
 </script>
 <template>
   <div class="container py-4">
-    <h1 class="text-center text-white mb-5" ref="myFocus">
+    <h1 class="text-center text-white mb-5" id="myFocus">
       Il Menù di "{{ restaurant.name }}"
     </h1>
     <div class="row d-flex flex-column align-items-center">
@@ -97,12 +100,14 @@ export default {
                 v-if="dish.image"
                 :src="dish.image"
                 class="img-fluid rounded h-100"
-                alt="..." />
+                alt="..."
+              />
               <img
                 v-else
                 src="https://www.salepepe.it/files/2019/06/cibo-spazzatura-@salepepe.jpg"
                 class="img-fluid rounded-start"
-                alt="..." />
+                alt="..."
+              />
             </div>
             <div class="col-md-8">
               <div class="card-body">
@@ -113,21 +118,25 @@ export default {
                   <button
                     v-if="!dish.addedToCart"
                     class="btn btn-primary"
-                    @click="addToCart(dish)">
+                    @click="addToCart(dish)"
+                  >
                     Aggiungi al carrello
                   </button>
                   <div
                     v-if="dish.addedToCart"
-                    class="d-flex align-items-center">
+                    class="d-flex align-items-center"
+                  >
                     <button
                       class="btn btn-danger me-2"
-                      @click="decrementQuantity(dish)">
+                      @click="decrementQuantity(dish)"
+                    >
                       -
                     </button>
                     <span id="counter" class="me-2">{{ dish.quantity }}</span>
                     <button
                       class="btn btn-success"
-                      @click="incrementQuantity(dish)">
+                      @click="incrementQuantity(dish)"
+                    >
                       +
                     </button>
                   </div>
