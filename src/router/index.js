@@ -11,6 +11,13 @@ import CartPage from "../pages/CartPage.vue";
 // creiamo il router e definiamo le rotte
 const router = createRouter({
   history: createWebHistory(),
+  scrollBehavior(to, from, savedPosition) {
+    // always scroll 10px above the element #main
+    return {
+      el: "#myFocus",
+      top: 0,
+    };
+  },
   routes: [
     {
       path: "/",

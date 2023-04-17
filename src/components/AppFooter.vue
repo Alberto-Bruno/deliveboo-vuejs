@@ -4,6 +4,7 @@ const apiBase = "http://127.0.0.1:8000/api/restaurants";
 const apiType = "http://127.0.0.1:8000/api/types";
 export default {
   name: "AppFooter",
+
   data: () => ({
     restaurants: [],
     loader: false,
@@ -11,6 +12,12 @@ export default {
   }),
 
   methods: {
+    // scrollToTop() {
+    //   window.scrollTo({
+    //     top: 0,
+    //     behavior: "smooth",
+    //   });
+    // },
     getTypes() {
       axios
         .get(apiType)
@@ -40,6 +47,11 @@ export default {
     this.getRestaurants();
     this.getTypes();
   },
+  // updated() {
+  //   this.$router.afterEach(() => {
+  //     this.scrollToTop();
+  //   });
+  // },
 };
 </script>
 
@@ -51,8 +63,8 @@ export default {
           <h6 class="fw-bold">Servizio Clienti</h6>
           <ul>
             <li><a href="#">Domande frequenti</a></li>
-            <li><a href="#">Accedi</a></li>
-            <li><a href="#">Registrati</a></li>
+            <li><a href="http://127.0.0.1:8000/login">Accedi</a></li>
+            <li><a href="http://127.0.0.1:8000/register">Registrati</a></li>
             <li><a href="#">Scarica l'app</a></li>
           </ul>
         </div>
@@ -67,8 +79,16 @@ export default {
         <div class="col">
           <h6 class="fw-bold">Ristoranti</h6>
           <ul>
-            <li v-for="restaurant in restaurants" :key="restaurant.id" class="text-capitalize">
-              {{ restaurant.name }}
+            <li
+              v-for="restaurant in restaurants"
+              :key="restaurant.id"
+              class="text-capitalize"
+            >
+              <router-link
+                :to="{ name: 'menu', params: { slug: restaurant.slug } }"
+              >
+                {{ restaurant.name }}
+              </router-link>
             </li>
           </ul>
         </div>
@@ -110,8 +130,12 @@ export default {
             <strong>Seguici su:</strong>
           </div>
           <div class="social-media p-3">
-            <a href="#"><i class="fa-brands fa-facebook text-black me-2"></i></a>
-            <a href="#"><i class="fa-brands fa-instagram text-black me-2"></i></a>
+            <a href="#"
+              ><i class="fa-brands fa-facebook text-black me-2"></i
+            ></a>
+            <a href="#"
+              ><i class="fa-brands fa-instagram text-black me-2"></i
+            ></a>
             <a href="#"><i class="fa-brands fa-twitter text-black me-2"></i></a>
           </div>
         </div>
