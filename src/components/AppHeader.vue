@@ -7,6 +7,17 @@ export default {
       return store.cartQuantity;
     },
   },
+  methods: {
+    scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    },
+  },
+  mounted() {
+    this.scrollToTop();
+  },
 };
 </script>
 
@@ -20,6 +31,7 @@ export default {
         class="navbar-brand d-flex align-items-center"
         id="navbar"
         :to="{ name: 'home' }"
+        @click="scrollToTop()"
       >
         <figure class="m-0">
           <img
@@ -47,7 +59,11 @@ export default {
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <RouterLink :to="{ name: 'home' }" class="nav-link">
+            <RouterLink
+              :to="{ name: 'home' }"
+              class="nav-link"
+              @click="scrollToTop()"
+            >
               Home
             </RouterLink>
           </li>
@@ -63,6 +79,7 @@ export default {
             :to="{ name: 'checkout' }"
             class="btn btn-danger log-btn py-1 px-3 cart"
             href="#"
+            @click="scrollToTop()"
           >
             <font-awesome-icon
               icon="fa-solid fa-cart-shopping"

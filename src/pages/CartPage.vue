@@ -80,7 +80,8 @@ export default {
                 name="nome"
                 id="nome"
                 v-model.trim="form.firstname"
-                placeholder="Inserisci nome" />
+                placeholder="Inserisci nome"
+              />
               <div class="invalid-feedback">{{ errors.firstname }}</div>
             </div>
 
@@ -95,7 +96,8 @@ export default {
                 name="cognome"
                 id="cognome"
                 v-model.trim="form.lastname"
-                placeholder="Inserisci cognome" />
+                placeholder="Inserisci cognome"
+              />
               <div class="invalid-feedback">{{ errors.lastname }}</div>
             </div>
 
@@ -110,7 +112,8 @@ export default {
                 name="indirizzo"
                 id="indirizzo"
                 v-model.trim="form.address"
-                placeholder="Inserisci indirizzo" />
+                placeholder="Inserisci indirizzo"
+              />
               <div class="invalid-feedback">{{ errors.address }}</div>
             </div>
 
@@ -125,7 +128,8 @@ export default {
                 name="telefono"
                 id="telefono"
                 v-model.trim="form.phone"
-                placeholder="Inserisci numero di telefono" />
+                placeholder="Inserisci numero di telefono"
+              />
               <div class="invalid-feedback">{{ errors.phone }}</div>
             </div>
 
@@ -140,7 +144,8 @@ export default {
                 name="email"
                 id="email"
                 v-model.trim="form.email"
-                placeholder="Inserisci mail" />
+                placeholder="Inserisci mail"
+              />
               <div class="invalid-feedback">{{ errors.email }}</div>
             </div>
 
@@ -154,20 +159,23 @@ export default {
                 :class="{ 'is-invalid': errors.delivery_time }"
                 name="delivery_time"
                 id="delivery_time"
-                v-model.trim="form.delivery_time" />
+                v-model.trim="form.delivery_time"
+              />
               <div class="invalid-feedback">{{ errors.delivery_time }}</div>
             </div>
 
             <div class="form-group d-flex justify-content-between mt-2 px-3">
               <router-link
                 :to="{ name: 'home' }"
-                class="btn btn-sm bg-secondary fw-semibold text-white">
+                class="btn btn-sm bg-secondary fw-semibold text-white"
+              >
                 Indietro
               </router-link>
               <button
                 @click="goToPayments"
                 type="button"
-                class="btn btn-sm btn-secondary indietro fw-semibold text-white">
+                class="btn btn-sm btn-secondary indietro fw-semibold text-white"
+              >
                 Vai al pagamento
               </button>
             </div>
@@ -180,7 +188,8 @@ export default {
             </div>
             <Braintree
               @returnToForm="showPayment = false"
-              @sendForm="sendForm"></Braintree>
+              @sendForm="sendForm"
+            ></Braintree>
           </div>
         </form>
       </div>
@@ -204,7 +213,8 @@ export default {
                             <img
                               class="card-img-top rounded shadow"
                               src="https://artsmidnorthcoast.com/wp-content/uploads/2014/05/no-image-available-icon-6.png"
-                              alt="" />
+                              alt=""
+                            />
                           </div>
                         </div>
                         <div class="col-md-8">
@@ -220,26 +230,32 @@ export default {
                     <div class="row">
                       <div class="col-4">
                         <div
-                          class="d-flex justify-content-between align-items-center my-3">
+                          class="d-flex justify-content-between align-items-center my-3"
+                        >
                           <button
-                            class="btn btn-sm indietro text-white fw-semibold">
+                            class="btn btn-sm indietro text-white fw-semibold"
+                          >
                             <i class="fa-solid fa-minus"></i>
                           </button>
                           <span class="fw-semibold">2</span>
                           <button
-                            class="btn btn-sm indietro text-white fw-semibold">
+                            class="btn btn-sm indietro text-white fw-semibold"
+                          >
                             <i class="fa-solid fa-plus"></i>
                           </button>
                         </div>
                       </div>
                       <div class="col-8">
                         <div
-                          class="d-flex justify-content-end align-items-center my-3">
+                          class="d-flex justify-content-end align-items-center my-3"
+                        >
                           <button
-                            class="btn btn-sm btn-danger text-white fw-semibold mx-2">
+                            class="btn btn-sm btn-danger text-white fw-semibold mx-2"
+                          >
                             <i
                               class="fa-solid fa-trash-can"
-                              title="Elimina"></i>
+                              title="Elimina"
+                            ></i>
                           </button>
                         </div>
                       </div>
@@ -253,7 +269,8 @@ export default {
                   <img
                     class="object-fit-contain empty-cart-img"
                     src=""
-                    alt="" />
+                    alt=""
+                  />
                 </div>
               </div>
             </div>
