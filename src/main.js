@@ -14,9 +14,11 @@ import { faGooglePlay } from "@fortawesome/free-brands-svg-icons";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faMinus } from "@fortawesome/free-solid-svg-icons";
 ;
 import "bootstrap/dist/css/bootstrap.min.css";
-library.add(faArrowDown, faUtensils, faBoltLightning, faApple, faGooglePlay, faArrowRight, faUser, faCartShopping);
+library.add(faArrowDown, faUtensils, faBoltLightning, faApple, faGooglePlay, faArrowRight, faUser, faCartShopping, faPlus, faMinus);
 import App from "./App.vue";
 
 const app = createApp(App);
