@@ -1,6 +1,6 @@
 <script>
 import axios from "axios";
-
+import { store } from "../store.js";
 export default {
   name: "MenuPage",
   data() {
@@ -15,6 +15,8 @@ export default {
       handler(newValue) {
         if (this.addToLocalCart()) {
           localStorage.setItem("cartDishes", JSON.stringify(newValue));
+          store.cartQuantity = JSON.parse(localStorage.getItem("cartDishes")).length;
+          console.log(store.cartQuantity);
           if (!JSON.parse(localStorage.getItem("cartDishes")).length)
             localStorage.clear();
         }
