@@ -45,6 +45,13 @@ export default {
         });
     },
 
+    scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    },
+
     getRestaurantTypes(types) {
       let t = "";
       types.forEach((type) => {
@@ -125,6 +132,7 @@ export default {
                 <h3 class="card-title mb-4 fw-bold menu-page">
                   <router-link
                     :to="{ name: 'menu', params: { slug: restaurant.slug } }"
+                    @click="scrollToTop()"
                   >
                     {{ restaurant.name }}
                   </router-link>

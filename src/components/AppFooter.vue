@@ -12,12 +12,12 @@ export default {
   }),
 
   methods: {
-    // scrollToTop() {
-    //   window.scrollTo({
-    //     top: 0,
-    //     behavior: "smooth",
-    //   });
-    // },
+    scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    },
     getTypes() {
       axios
         .get(apiType)
@@ -86,6 +86,7 @@ export default {
             >
               <router-link
                 :to="{ name: 'menu', params: { slug: restaurant.slug } }"
+                @click="scrollToTop()"
               >
                 {{ restaurant.name }}
               </router-link>
