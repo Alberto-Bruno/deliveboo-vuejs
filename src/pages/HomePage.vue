@@ -59,49 +59,30 @@ export default {
     <div class="jumbo" ref="jumbo"></div>
     <div class="container">
       <div class="section-header my-5">
-        <h1 class="fw-bolder text-light">Le cucine più amate</h1>
-        <h5 class="text-light">
-          Trova le cucine più amate dai ristoranti e ordina online a domicilio.
+        <h1 class="fw-bolder text-light text-center">I piatti che ami a casa tua.</h1>
+        <h5 class="text-center text-light">
+          Esplora tra le cucine più amate e ordina online con consegna a domicilio.
         </h5>
 
         <h1 v-if="checked.length === 0" class="text-white text-center mt-5">
-          Seleziona almeno una tipologia per inziare la ricerca!
+          Scopri i menù dei nostri ristoranti
         </h1>
         <h1 v-else class="text-white text-center mt-5">
-          Seleziona un ristorante e scopri il suo menù!
+          Seleziona un ristorante che preferisci!
         </h1>
       </div>
 
-      <div
-        class="row align-items-stretch d-flex justify-content-center flex-wrap g-4 mb-5 pb-5"
-        ref="types-restaurant"
-      >
-        <div
-          class="check-col col-lg-2 col-md-4 col-sm-5 col-8"
-          :class="{ checked: checked.includes(t.name) }"
-          v-for="t in types"
-          :key="t.id"
-        >
-          <input
-            v-model="checked"
-            type="checkbox"
-            :id="t.name"
-            :value="t.name"
-          />
+      <div class="row align-items-stretch d-flex justify-content-center flex-wrap g-4 mb-5 pb-5" ref="types-restaurant">
+        <div class="check-col col-lg-2 col-md-4 col-sm-5 col-8" :class="{ checked: checked.includes(t.name) }"
+          v-for="t in types" :key="t.id">
+          <input v-model="checked" type="checkbox" :id="t.name" :value="t.name" />
           <label :for="t.name" class="h-100 w-100">
             <div class="cs-card d-flex flex-column h-100">
               <figure class="m-0 h-75">
-                <img
-                  :src="t.image"
-                  :alt="t.name"
-                  class="h-100 w-100"
-                  :class="{ activeTop: checked.includes(t.name) }"
-                />
+                <img :src="t.image" :alt="t.name" class="h-100 w-100" :class="{ activeTop: checked.includes(t.name) }" />
               </figure>
-              <figcaption
-                class="bg-light h-25 d-flex align-items-center justify-content-center"
-                :class="{ activeBottom: checked.includes(t.name) }"
-              >
+              <figcaption class="bg-light h-25 d-flex align-items-center justify-content-center"
+                :class="{ activeBottom: checked.includes(t.name) }">
                 <h5>{{ t.name }}</h5>
               </figcaption>
             </div>
@@ -112,11 +93,11 @@ export default {
   </section>
   <restaurants-page></restaurants-page>
   <section id="app">
-    <div class="container my-5">
-      <div class="row d-flex justify-content-between align-items-center my-5">
+    <div class="container my-3">
+      <div class="row d-flex justify-content-between align-items-center my-3">
         <div class="col-12 col-sm-5 col-md-4 col-lg-4">
           <figure>
-            <img class="w-50" :src="buildImagePath('cell.jpg')" alt="" />
+            <img class="w-100" :src="buildImagePath('DeliveBoo.png')" alt="" />
           </figure>
         </div>
         <div class="col-12 col-sm-12 col-md-6 col-lg-5">
@@ -129,28 +110,18 @@ export default {
           </div>
           <div class="group-button d-flex gap-2">
             <div class="btn bg-dark d-flex align-items-center gap-3">
-              <font-awesome-icon
-                icon="fa-brands fa-apple"
-                class="text-light fa-2x"
-              />
+              <font-awesome-icon icon="fa-brands fa-apple" class="text-light fa-2x" />
               <div class="d-flex flex-column">
                 <span class="text-light">Scarica su</span>
-                <a class="text-light text-decoration-none" href="#"
-                  >App Store</a
-                >
+                <a class="text-light text-decoration-none" href="#">App Store</a>
               </div>
             </div>
             <div>
               <div class="btn bg-dark d-flex align-items-center gap-3">
-                <font-awesome-icon
-                  icon="fa-brands fa-google-play"
-                  class="text-light fa-2x"
-                />
+                <font-awesome-icon icon="fa-brands fa-google-play" class="text-light fa-2x" />
                 <div class="d-flex flex-column">
                   <span class="text-light">Scarica su</span>
-                  <a class="text-light text-decoration-none" href="#"
-                    >Google Play</a
-                  >
+                  <a class="text-light text-decoration-none" href="#">Google Play</a>
                 </div>
               </div>
             </div>

@@ -125,13 +125,15 @@ export default {
 </script>
 
 <template lang="">
-  <div class="container">
-    <div class="row d-flex justify-content-between my-5">
+  <div class="container py-4">
+    <h1 class="text-white fw-bold">Completa il tuo ordine</h1>
+
+    <div class="row d-flex justify-content-between mb-5">
       <div class="col-lg-8 col-md-12">
         <form @submit.prevent="sendForm">
           <div v-if="!showPayment">
             <div class="form-group">
-              <label for="nome" class="control-label fw-semibold mt-3"
+              <label for="nome" class="control-label text-white fw-bold mt-3"
                 >Nome</label
               >
               <input
@@ -147,7 +149,7 @@ export default {
             </div>
 
             <div class="form-group">
-              <label for="cognome" class="control-label fw-semibold mt-3"
+              <label for="cognome" class="control-label text-white fw-bold mt-3"
                 >Cognome</label
               >
               <input
@@ -163,7 +165,9 @@ export default {
             </div>
 
             <div class="form-group">
-              <label for="indirizzo" class="control-label fw-semibold mt-3"
+              <label
+                for="indirizzo"
+                class="control-label text-white fw-bold mt-3"
                 >Indirizzo</label
               >
               <input
@@ -179,7 +183,9 @@ export default {
             </div>
 
             <div class="form-group">
-              <label for="telefono" class="control-label fw-semibold mt-3"
+              <label
+                for="telefono"
+                class="control-label text-white fw-bold mt-3"
                 >Telefono</label
               >
               <input
@@ -195,7 +201,7 @@ export default {
             </div>
 
             <div class="form-group">
-              <label for="email" class="control-label fw-semibold mt-3"
+              <label for="email" class="control-label text-white fw-bold mt-3"
                 >Email</label
               >
               <input
@@ -211,7 +217,9 @@ export default {
             </div>
 
             <div class="form-group">
-              <label for="delivery_time" class="control-label fw-semibold mt-3"
+              <label
+                for="delivery_time"
+                class="control-label text-white fw-bold mt-3"
                 >Orario di consegna</label
               >
               <input
@@ -225,17 +233,17 @@ export default {
               <div class="invalid-feedback">{{ errors.delivery_time }}</div>
             </div>
 
-            <div class="form-group d-flex justify-content-between mt-2 px-3">
+            <div class="form-group d-flex justify-content-between mt-4">
               <router-link
                 :to="{ name: 'home' }"
-                class="btn btn-sm bg-secondary fw-semibold text-white"
+                class="btn btn-sm bg-danger text-white fw-bold text-white"
               >
                 Indietro
               </router-link>
               <button
                 @click="goToPayments"
                 type="button"
-                class="btn btn-sm btn-secondary indietro fw-semibold text-white"
+                class="btn btn-sm btn-success indietro text-white fw-bold text-white"
               >
                 Vai al pagamento
               </button>
