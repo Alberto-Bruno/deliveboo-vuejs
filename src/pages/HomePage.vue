@@ -59,13 +59,13 @@ export default {
     <div class="jumbo" ref="jumbo"></div>
     <div class="container">
       <div class="section-header my-5">
-        <h1 class="fw-bolder text-light text-center">I piatti che ami, a domicilio.</h1>
+        <h1 class="fw-bolder text-light text-center">I piatti che ami a casa tua.</h1>
         <h5 class="text-center text-light">
-          Trova le cucine più amate e ordina online a domicilio.
+          Esplora tra le cucine più amate e ordina online con consegna a domicilio.
         </h5>
 
         <h1 v-if="checked.length === 0" class="text-white text-center mt-5">
-          Le cucine più amate
+          Seleziona i tuoi piatti
         </h1>
         <h1 v-else class="text-white text-center mt-5">
           Seleziona un ristorante e scopri il suo menù!
