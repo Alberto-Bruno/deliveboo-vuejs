@@ -82,7 +82,6 @@ export default {
             this.form.payment_status = 1;
             this.form.dishes = (JSON.parse(localStorage.getItem('cartDishes')));
             this.form.total_price = this.totalPrice();
-            return console.log(this.form);
             axios
                 .post(apiBase, this.form)
                 .then((res) => {
