@@ -58,6 +58,14 @@ export default {
             }
             localStorage.setItem('cartDishes', JSON.stringify(this.cartDishes));
             store.cartQuantity = JSON.parse(localStorage.getItem("cartDishes")).length;
+            if (!JSON.parse(localStorage.getItem("cartDishes")).length)
+                localStorage.clear();
+        },
+
+        clearCart() {
+            this.cartDishes = [];
+            localStorage.clear();
+            store.cartQuantity = 0;
         },
 
         totalPrice() {
@@ -322,7 +330,7 @@ export default {
                             <p class="fw-semibold mb-0">Prezzo totale: <span>{{totalPrice()}} &euro;</span></p>
                         </div>
                         <div class="d-flex justify-content-end align-items-center my-3">
-                            <button class="btn btn-sm btn-danger  text-white fw-semibold mx-2"><i class="fa-solid fa-trash-can" title="Elimina"></i></button>
+                            <button class="btn btn-sm btn-danger  text-white fw-semibold mx-2" @click="clearCart()"><i class="fa-solid fa-trash-can" title="Elimina"></i></button>
                         </div>
                     </div>
             </div>
