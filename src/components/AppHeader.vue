@@ -1,6 +1,12 @@
 <script>
+import { store } from "../store.js";
 export default {
   name: "AppHeader",
+  computed: {
+    getCartQuantity() {
+      return store.cartQuantity;
+    }
+  }
 };
 </script>
 
@@ -16,31 +22,33 @@ export default {
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Left Side Of Navbar -->
         <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <RouterLink :to="{ name: 'home' }" class="nav-link">
-            Home
-          </RouterLink>
+          <li class="nav-item">
+            <RouterLink :to="{ name: 'home' }" class="nav-link">
+              Home
+            </RouterLink>
           </li>
           <!-- <li class="nav-item">
-                          <a class="nav-link" href="http://127.0.0.1:8000/dashboard"
-                          >Dashboard</a
-                          >
-                          </li> -->
+                                                                <a class="nav-link" href="http://127.0.0.1:8000/dashboard"
+                                                                >Dashboard</a
+                                                                >
+                                                                </li> -->
         </ul>
         <div class="d-flex gap-4">
           <a class="btn btn-danger log-btn py-1 px-3" href="http://127.0.0.1:8000/login">
             <font-awesome-icon icon="fa-solid fa-user"></font-awesome-icon>
           </a>
-          <a class="btn btn-danger log-btn py-1 px-3 cart" href="#">
+          <RouterLink :to="{ name: 'checkout' }" class="btn btn-danger log-btn py-1 px-3 cart" href="#">
             <font-awesome-icon icon="fa-solid fa-cart-shopping"></font-awesome-icon>
-            <div class="cart-badge"></div>
-          </a>
+            <div class="cart-badge d-flex justify-content-center align-items-center">
+              <span>{{ getCartQuantity }}</span>
+            </div>
+          </RouterLink>
         </div>
         <!-- Right Side Of Navbar -->
       </div>
@@ -82,15 +90,9 @@ export default {
     border-radius: 10px;
     font-size: 12px;
     font-weight: 500;
-    text-align: center;
     color: #ffffff;
-    width: 18px;
-    height: 18px;
-    display: none;
-  }
-
-  .cart-badge.active {
-    display: block;
+    width: 20px;
+    height: 20px;
   }
 }
 </style>
