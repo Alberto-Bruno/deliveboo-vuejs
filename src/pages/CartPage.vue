@@ -1,10 +1,6 @@
 <script>
 import axios from 'axios'
 
-const STORAGE_KEY = 'deliveboo-storage-key'
-const PAID = 'deliveboo-paid'
-const QTA_ITEMS = 'qta-storage-items'
-
 export default {
     name: 'form-payments',
     data: () => ({
