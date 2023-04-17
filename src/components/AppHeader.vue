@@ -46,10 +46,10 @@ export default {
           </li>
         </ul>
         <div class="d-flex gap-4">
-          <a class="btn btn-danger log-btn py-1 px-3" href="http://127.0.0.1:8000/login">
+          <a class="btn btn-warning log-btn py-1 px-3" href="http://127.0.0.1:8000/login">
             <font-awesome-icon icon="fa-solid fa-user"></font-awesome-icon>
           </a>
-          <RouterLink :to="{ name: 'checkout' }" class="btn btn-danger log-btn py-1 px-3 cart" href="#"
+          <RouterLink :to="{ name: 'checkout' }" class="btn btn-warning log-btn py-1 px-3 cart" href="#"
             @click="scrollToTop()">
             <font-awesome-icon icon="fa-solid fa-cart-shopping"></font-awesome-icon>
             <div class="cart-badge d-flex justify-content-center align-items-center">

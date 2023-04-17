@@ -113,29 +113,15 @@ export default {
     <h1 class="text-center text-white mb-5" id="myFocus">
       Il Menù di "{{ restaurant.name }}"
     </h1>
-    <div
-      class="row d-flex flex-column justify-content-center align-items-center"
-    >
-      <div
-        class="col-12 d-flex justify-content-center col-sm-10 col-md-12 col-lg-8 col-xl-7 col-xxl-6 mb-4"
-        v-for="dish in dishes"
-        :key="dish.id"
-      >
+    <div class="row d-flex flex-column justify-content-center align-items-center">
+      <div class="col-12 d-flex justify-content-center col-sm-10 col-md-12 col-lg-8 col-xl-7 col-xxl-6 mb-4"
+        v-for="dish in dishes" :key="dish.id">
         <div class="card h-100">
           <div class="row g-0">
             <div class="col-md-4 p-2">
-              <img
-                v-if="dish.image"
-                :src="dish.image"
-                class="img-fluid rounded h-100"
-                alt="..."
-              />
-              <img
-                v-else
-                src="https://www.salepepe.it/files/2019/06/cibo-spazzatura-@salepepe.jpg"
-                class="img-fluid rounded-start"
-                alt="..."
-              />
+              <img v-if="dish.image" :src="dish.image" class="img-fluid rounded h-100" alt="..." />
+              <img v-else src="https://www.salepepe.it/files/2019/06/cibo-spazzatura-@salepepe.jpg"
+                class="img-fluid rounded-start" alt="..." />
             </div>
             <div class="col-md-8">
               <div class="card-body">
@@ -143,28 +129,15 @@ export default {
                 <p class="card-text">{{ dish.description }}</p>
                 <p class="badge text-bg-success">€ {{ dish.price }}</p>
                 <div class="d-flex justify-content-end">
-                  <button
-                    v-if="!dish.addedToCart"
-                    class="btn btn-primary"
-                    @click="addToCart(dish)"
-                  >
+                  <button v-if="!dish.addedToCart" class="btn btn-success" @click="addToCart(dish)">
                     Aggiungi al carrello
                   </button>
-                  <div
-                    v-if="dish.addedToCart"
-                    class="d-flex align-items-center"
-                  >
-                    <button
-                      class="btn btn-danger me-2"
-                      @click="decrementQuantity(dish)"
-                    >
+                  <div v-if="dish.addedToCart" class="d-flex align-items-center">
+                    <button class="btn btn-danger me-2" @click="decrementQuantity(dish)">
                       -
                     </button>
                     <span id="counter" class="me-2">{{ dish.quantity }}</span>
-                    <button
-                      class="btn btn-success"
-                      @click="incrementQuantity(dish)"
-                    >
+                    <button class="btn btn-success" @click="incrementQuantity(dish)">
                       +
                     </button>
                   </div>
