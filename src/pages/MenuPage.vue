@@ -15,7 +15,9 @@ export default {
       handler(newValue) {
         if (this.addToLocalCart()) {
           localStorage.setItem("cartDishes", JSON.stringify(newValue));
-          console.log(localStorage.getItem("cartDishes"));
+          if (!JSON.parse(localStorage.getItem("cartDishes")).length)
+            localStorage.clear();
+          console.log(localStorage);
         }
       },
       deep: true,
