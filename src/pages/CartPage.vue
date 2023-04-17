@@ -8,117 +8,14 @@ export default {
   name: "form-payments",
   components: { Braintree },
 
-    data: () => ({
-        form: {
-            firstname: '',
-            lastname: '',
-            address: '',
-            phone: '',
-            email: '',
-            delivery_time: ''
-        },
-        cartDishes: [],
-        errors: {},
-        showPayment: false,
-    }),
-
-    methods: {
-        addQuantity(dish) {
-            dish.quantity++;
-            const cartDishes = JSON.parse(localStorage.getItem('cartDishes'));
-            const updatedCartDishes = cartDishes.map(cartDish => {
-                if (cartDish.id === dish.id) {
-                    return dish;
-                }
-                return cartDish;
-            });
-            localStorage.setItem('cartDishes', JSON.stringify(updatedCartDishes));
-        },
-        deleteQuantity(dish) {
-            dish.quantity--;
-            const cartDishes = JSON.parse(localStorage.getItem('cartDishes'));
-            const updatedCartDishes = cartDishes.map(cartDish => {
-                if (cartDish.id === dish.id) {
-                    return dish;
-                }
-                return cartDish;
-            });
-            localStorage.setItem('cartDishes', JSON.stringify(updatedCartDishes));
-        },
-
-        ClearDish(dish) {
-            dish.quantity = 0;
-            for (let i = 0; i < this.cartDishes.length; i++) {
-                if (this.cartDishes[i].id === dish.id) {
-                    this.cartDishes.splice(i, 1);
-                    i--;
-                }
-            }
-            localStorage.setItem('cartDishes', JSON.stringify(this.cartDishes));
-            store.cartQuantity = JSON.parse(localStorage.getItem("cartDishes")).length;
-            if (!JSON.parse(localStorage.getItem("cartDishes")).length)
-                localStorage.clear();
-        },
-
-        clearCart() {
-            this.cartDishes = [];
-            localStorage.clear();
-            store.cartQuantity = 0;
-            this.$router.push({
-                name: 'home'
-            });
-        },
-
-        totalPrice() {
-            let total_price = 0;
-            let all_dishes = this.cartDishes;
-            for (let dish in all_dishes) {
-                total_price += all_dishes[dish].price * all_dishes[dish].quantity;
-            }
-            return total_price.toFixed(2);
-        },
-
-        sendForm() {
-            this.form.payment_status = 1;
-            this.form.dishes = (JSON.parse(localStorage.getItem('cartDishes')));
-            this.form.total_price = this.totalPrice();
-            axios
-                .post(apiBase, this.form)
-                .then((res) => {
-                    console.log(res.data);
-                })
-                .catch((err) => {
-                    console.error(err);
-                });
-        },
-        goToPayments() {
-            if (this.orderFormCheck()) this.showPayment = true;
-        },
-        orderFormCheck() {
-            this.errors = {};
-            if (!this.form.firstname || !isNaN(this.form.firstname)) {
-                this.errors.firstname = "Il nome che hai inserito non è valido.";
-            }
-            if (!this.form.lastname || !isNaN(this.form.lastname)) {
-                this.errors.lastname = "Il cognome che hai inserito non è valido.";
-            }
-            if (!this.form.address || !isNaN(this.form.address)) {
-                this.errors.address = "L'indirizzo inserito non è valido.";
-            }
-            if (!this.form.phone || isNaN(this.form.phone)) {
-                this.errors.phone = "Il numero di telefono inserito non è valido.";
-            }
-            const validRegex =
-                /^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)$/;
-            if (!this.form.email || !this.form.email.match(validRegex)) {
-                this.errors.email = "La mail che hai inserito non è valida!";
-            }
-            if (!this.form.delivery_time) {
-                this.errors.delivery_time = "Devi inserire un orario di consegna.";
-            }
-
-            return Object.keys(this.errors).length ? false : true;
-        },
+  data: () => ({
+    form: {
+      firstname: "",
+      lastname: "",
+      address: "",
+      phone: "",
+      email: "",
+      delivery_time: "",
     },
     cartDishes: [],
     errors: {},
@@ -187,14 +84,8 @@ export default {
       this.form.payment_status = 1;
       this.form.dishes = JSON.parse(localStorage.getItem("cartDishes"));
       this.form.total_price = this.totalPrice();
-      console.log(this.form);
       axios
-        .post(apiBase, this.form, {
-          headers: {
-            "Content-type": "text/json",
-            "Access-Control-Allow-Origin": "http://localhost:5174",
-          },
-        })
+        .post(apiBase, this.form)
         .then((res) => {
           console.log(res.data);
         })
