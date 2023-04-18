@@ -37,6 +37,13 @@ export default {
         });
     },
 
+    scrollToRestaurant() {
+      const top = this.isActive ? 915 : 0;
+      window.scrollTo({
+        top,
+        behavior: "smooth",
+      });
+    },
     buildImagePath(image) {
       const url = new URL(`../assets/img/${image}`, import.meta.url);
       return url.href;
@@ -91,6 +98,10 @@ export default {
             type="checkbox"
             :id="t.name"
             :value="t.name"
+            @click="
+              isActive = !isActive;
+              scrollToRestaurant();
+            "
           />
           <label :for="t.name" class="h-100 w-100">
             <div class="cs-card d-flex flex-column h-100">
