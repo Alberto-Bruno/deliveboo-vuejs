@@ -88,11 +88,17 @@ export default {
         .post(apiBase, this.form)
         .then((res) => {
           console.log(res.data);
+
+          localStorage.clear();
+          window.location.href = "/thankyou";
         })
         .catch((err) => {
           console.error(err);
+
+          window.location.href = "/error";
         });
     },
+
     goToPayments() {
       if (this.orderFormCheck()) this.showPayment = true;
     },
@@ -241,14 +247,14 @@ export default {
             <div class="form-group d-flex justify-content-between mt-4">
               <router-link
                 :to="{ name: 'home' }"
-                class="btn btn-sm bg-danger text-white fw-bold text-white"
+                class="btn btn-outline-light fw-bold"
               >
                 Indietro
               </router-link>
               <button
                 @click="goToPayments"
                 type="button"
-                class="btn btn-sm btn-success indietro text-white fw-bold text-white"
+                class="btn btn-outline-light fw-bold"
               >
                 Vai al pagamento
               </button>
