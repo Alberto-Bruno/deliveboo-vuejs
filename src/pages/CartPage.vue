@@ -89,14 +89,10 @@ export default {
       axios
         .post(apiBase, this.form)
         .then((res) => {
-          console.log(res.data);
-
           localStorage.clear();
           window.location.href = "/thankyou";
         })
         .catch((err) => {
-          console.error(err);
-
           window.location.href = "/error";
         });
     },
