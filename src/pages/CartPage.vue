@@ -120,6 +120,10 @@ export default {
       if (!this.form.delivery_time) {
         this.errors.delivery_time = "Devi inserire un orario di consegna.";
       }
+      if (this.totalPrice() === "0.00") {
+        this.errors.form =
+          "Deve essere presente almeno un piatto per fare l'ordine!";
+      }
 
       return Object.keys(this.errors).length ? false : true;
     },
@@ -261,7 +265,7 @@ export default {
         </form>
       </div>
       <div class="col-lg-4 col-md-12 my-5 my-sm-5 my-lg-0">
-        <div class="card shadow my-5">
+        <div class="card shadow my-5" :class="{ 'is-invalid': errors.form }">
           <div class="card-header bg-header">
             <h2 class="text-center text-white m-0">Riepilogo Ordine</h2>
           </div>
@@ -355,6 +359,7 @@ export default {
             </div>
           </div>
         </div>
+        <div class="invalid-feedback text-center">{{ errors.form }}</div>
       </div>
     </div>
   </div>
