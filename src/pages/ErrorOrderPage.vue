@@ -14,7 +14,6 @@ export default {
   },
   mounted() {
     this.loader();
-    localStorage.clear();
 
     setTimeout(() => {
       this.$router.push({ name: "checkout" });
@@ -103,6 +102,7 @@ export default {
     }
   }
 }
+
 .container-content {
   width: 50%;
   height: 90vh;
