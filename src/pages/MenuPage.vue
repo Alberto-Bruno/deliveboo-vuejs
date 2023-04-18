@@ -16,12 +16,10 @@ export default {
       handler(newValue) {
         if (this.addToLocalCart()) {
           localStorage.setItem("cartDishes", JSON.stringify(newValue));
-          store.cartQuantity = JSON.parse(
-            localStorage.getItem("cartDishes")
-          ).length;
+          const cartQuantity = newValue.reduce((total, dish) => total + dish.quantity, 0);
+          store.cartQuantity = cartQuantity;
           console.log(store.cartQuantity);
-          if (!JSON.parse(localStorage.getItem("cartDishes")).length)
-            localStorage.clear();
+          if (!cartQuantity) localStorage.clear();
         }
       },
       deep: true,
@@ -29,25 +27,24 @@ export default {
   },
   methods: {
     addToCart(dish) {
-      this.addToLocalCart();
-      if (!this.cartRestaurantName) {
+      const cartDish = this.cartDishes.find((cartDish) => cartDish.id === dish.id);
+      if (cartDish) {
+        this.incrementQuantity(cartDish);
+      } else {
         dish.quantity = 1;
         dish.addedToCart = true;
-        const cartDish = { ...dish };
-        this.cartDishes.push(cartDish);
+        const newCartDish = { ...dish };
+        this.cartDishes.push(newCartDish);
+        this.addToLocalCart();
       }
     },
     incrementQuantity(dish) {
       dish.quantity++;
-      const cartDish = this.cartDishes.find((cartDish) => {
-        return cartDish.name === dish.name;
-      });
+      const cartDish = this.cartDishes.find((cartDish) => cartDish.id === dish.id);
       cartDish.quantity++;
     },
     decrementQuantity(dish) {
-      const cartDish = this.cartDishes.find((cartDish) => {
-        return cartDish.name === dish.name;
-      });
+      const cartDish = this.cartDishes.find((cartDish) => cartDish.id === dish.id);
       if (dish.quantity > 1) {
         dish.quantity--;
         cartDish.quantity--;
@@ -77,9 +74,7 @@ export default {
       ) {
         const localCartDishes = JSON.parse(localStorage.getItem("cartDishes"));
         localCartDishes.forEach((localDish) => {
-          const dish = this.dishes.find((dish) => {
-            return dish.id === localDish.id;
-          });
+          const dish = this.dishes.find((dish) => dish.id === localDish.id);
           dish.quantity = localDish.quantity;
           dish.addedToCart = true;
           this.cartDishes.push({ ...dish });
@@ -92,6 +87,7 @@ export default {
       this.cartRestaurantName = "";
     },
   },
+
   mounted() {
     // this.$refs.myFocus.focus();
     const slug = this.$route.params.slug;
@@ -123,16 +119,12 @@ export default {
     <h1 class="text-center text-white mb-5" id="myFocus">
       Il Menù di "{{ restaurant.name }}"
     </h1>
-    <div
-      class="row d-flex flex-column justify-content-center align-items-center">
+    <div class="row d-flex flex-column justify-content-center align-items-center">
       <div class="alert-overlay" v-if="cartRestaurantName">
         <div class="alert alert-light col-5 text-center fw-bold" role="alert">
           Attenzione! Non puoi effettuare acquisti da ristoranti diversi.
           <div class="d-flex justify-content-around mt-3">
-            <a
-              type="button"
-              :href="`http://localhost:5174/restaurants/${cartRestaurantName}`"
-              class="btn btn-success">
+            <a type="button" :href="`http://localhost:5174/restaurants/${cartRestaurantName}`" class="btn btn-success">
               Continua ad Acquistare
             </a>
             <button type="button" class="btn btn-danger" @click="clearStorage">
@@ -141,23 +133,14 @@ export default {
           </div>
         </div>
       </div>
-      <div
-        class="col-12 d-flex justify-content-center col-sm-10 col-md-12 col-lg-8 col-xl-7 col-xxl-6 mb-4"
-        v-for="dish in dishes"
-        :key="dish.id">
+      <div class="col-12 d-flex justify-content-center col-sm-10 col-md-12 col-lg-8 col-xl-7 col-xxl-6 mb-4"
+        v-for="dish in dishes" :key="dish.id">
         <div class="card h-100">
           <div class="row g-0">
             <div class="col-md-4 p-2">
-              <img
-                v-if="dish.image"
-                :src="dish.image"
-                class="img-fluid rounded h-100"
-                alt="..." />
-              <img
-                v-else
-                src="https://www.salepepe.it/files/2019/06/cibo-spazzatura-@salepepe.jpg"
-                class="img-fluid rounded-start"
-                alt="..." />
+              <img v-if="dish.image" :src="dish.image" class="img-fluid rounded h-100" alt="..." />
+              <img v-else src="https://www.salepepe.it/files/2019/06/cibo-spazzatura-@salepepe.jpg"
+                class="img-fluid rounded-start" alt="..." />
             </div>
             <div class="col-md-8">
               <div class="card-body">
@@ -165,24 +148,15 @@ export default {
                 <p class="card-text">{{ dish.description }}</p>
                 <p class="badge text-bg-success">€ {{ dish.price }}</p>
                 <div class="d-flex justify-content-end">
-                  <button
-                    v-if="!dish.addedToCart"
-                    class="btn btn-success"
-                    @click="addToCart(dish)">
+                  <button v-if="!dish.addedToCart" class="btn btn-success" @click="addToCart(dish)">
                     Aggiungi al carrello
                   </button>
-                  <div
-                    v-if="dish.addedToCart"
-                    class="d-flex align-items-center">
-                    <button
-                      class="btn btn-danger me-2"
-                      @click="decrementQuantity(dish)">
+                  <div v-if="dish.addedToCart" class="d-flex align-items-center">
+                    <button class="btn btn-danger me-2" @click="decrementQuantity(dish)">
                       -
                     </button>
                     <span id="counter" class="me-2">{{ dish.quantity }}</span>
-                    <button
-                      class="btn btn-success"
-                      @click="incrementQuantity(dish)">
+                    <button class="btn btn-success" @click="incrementQuantity(dish)">
                       +
                     </button>
                   </div>
