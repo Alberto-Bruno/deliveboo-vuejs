@@ -8,6 +8,7 @@ export default {
       restaurant: {},
       dishes: [],
       cartDishes: [],
+      cartRestaurantName: "",
     };
   },
   watch: {
@@ -15,7 +16,9 @@ export default {
       handler(newValue) {
         if (this.addToLocalCart()) {
           localStorage.setItem("cartDishes", JSON.stringify(newValue));
-          store.cartQuantity = JSON.parse(localStorage.getItem("cartDishes")).length;
+          store.cartQuantity = JSON.parse(
+            localStorage.getItem("cartDishes")
+          ).length;
           console.log(store.cartQuantity);
           if (!JSON.parse(localStorage.getItem("cartDishes")).length)
             localStorage.clear();
@@ -26,11 +29,13 @@ export default {
   },
   methods: {
     addToCart(dish) {
-      dish.quantity = 1;
-      dish.addedToCart = true;
-      const cartDish = { ...dish };
-      this.cartDishes.push(cartDish);
       this.addToLocalCart();
+      if (!this.cartRestaurantName) {
+        dish.quantity = 1;
+        dish.addedToCart = true;
+        const cartDish = { ...dish };
+        this.cartDishes.push(cartDish);
+      }
     },
     incrementQuantity(dish) {
       dish.quantity++;
@@ -58,7 +63,7 @@ export default {
       if (!localStorage.getItem("restaurantName")) {
         localStorage.setItem("restaurantName", restaurantName);
       } else if (localStorage.getItem("restaurantName") !== restaurantName) {
-        console.error("Non puoi effettuare ordini da ristoranti diversi!");
+        this.cartRestaurantName = localStorage.getItem("restaurantName");
         return false;
       }
       return true;
@@ -80,6 +85,11 @@ export default {
           this.cartDishes.push({ ...dish });
         });
       }
+    },
+    clearStorage() {
+      localStorage.clear();
+      store.cartQuantity = 0;
+      this.cartRestaurantName = "";
     },
   },
   mounted() {
@@ -113,15 +123,41 @@ export default {
     <h1 class="text-center text-white mb-5" id="myFocus">
       Il Menù di "{{ restaurant.name }}"
     </h1>
-    <div class="row d-flex flex-column justify-content-center align-items-center">
-      <div class="col-12 d-flex justify-content-center col-sm-10 col-md-12 col-lg-8 col-xl-7 col-xxl-6 mb-4"
-        v-for="dish in dishes" :key="dish.id">
+    <div
+      class="row d-flex flex-column justify-content-center align-items-center">
+      <div class="alert-overlay" v-if="cartRestaurantName">
+        <div class="alert alert-light col-5 text-center fw-bold" role="alert">
+          Attenzione! Non puoi effettuare acquisti da ristoranti diversi.
+          <div class="d-flex justify-content-around mt-3">
+            <a
+              type="button"
+              :href="`http://localhost:5174/restaurants/${cartRestaurantName}`"
+              class="btn btn-success">
+              Continua ad Acquistare
+            </a>
+            <button type="button" class="btn btn-danger" @click="clearStorage">
+              Svuota Carrello
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-12 d-flex justify-content-center col-sm-10 col-md-12 col-lg-8 col-xl-7 col-xxl-6 mb-4"
+        v-for="dish in dishes"
+        :key="dish.id">
         <div class="card h-100">
           <div class="row g-0">
             <div class="col-md-4 p-2">
-              <img v-if="dish.image" :src="dish.image" class="img-fluid rounded h-100" alt="..." />
-              <img v-else src="https://www.salepepe.it/files/2019/06/cibo-spazzatura-@salepepe.jpg"
-                class="img-fluid rounded-start" alt="..." />
+              <img
+                v-if="dish.image"
+                :src="dish.image"
+                class="img-fluid rounded h-100"
+                alt="..." />
+              <img
+                v-else
+                src="https://www.salepepe.it/files/2019/06/cibo-spazzatura-@salepepe.jpg"
+                class="img-fluid rounded-start"
+                alt="..." />
             </div>
             <div class="col-md-8">
               <div class="card-body">
@@ -129,15 +165,24 @@ export default {
                 <p class="card-text">{{ dish.description }}</p>
                 <p class="badge text-bg-success">€ {{ dish.price }}</p>
                 <div class="d-flex justify-content-end">
-                  <button v-if="!dish.addedToCart" class="btn btn-success" @click="addToCart(dish)">
+                  <button
+                    v-if="!dish.addedToCart"
+                    class="btn btn-success"
+                    @click="addToCart(dish)">
                     Aggiungi al carrello
                   </button>
-                  <div v-if="dish.addedToCart" class="d-flex align-items-center">
-                    <button class="btn btn-danger me-2" @click="decrementQuantity(dish)">
+                  <div
+                    v-if="dish.addedToCart"
+                    class="d-flex align-items-center">
+                    <button
+                      class="btn btn-danger me-2"
+                      @click="decrementQuantity(dish)">
                       -
                     </button>
                     <span id="counter" class="me-2">{{ dish.quantity }}</span>
-                    <button class="btn btn-success" @click="incrementQuantity(dish)">
+                    <button
+                      class="btn btn-success"
+                      @click="incrementQuantity(dish)">
                       +
                     </button>
                   </div>
@@ -174,6 +219,19 @@ export default {
   //   color: rgb(218, 150, 24);
   text-transform: uppercase;
   letter-spacing: 1px;
+}
+
+.alert-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba($color: #eeaf5e, $alpha: 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
 }
 
 @media (min-width: 1440px) {
