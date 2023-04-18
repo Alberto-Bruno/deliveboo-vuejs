@@ -7,6 +7,8 @@ import NotFoundPage from "../pages/NotFoundPage.vue";
 import MenuPage from "../pages/MenuPage.vue";
 import PaymentPage from "../pages/PaymentForm.vue";
 import CartPage from "../pages/CartPage.vue";
+import ThankYouPage from "../pages/ThankYouPage.vue";
+import ErrorOrderPage from "../pages/ErrorOrderPage.vue";
 
 // creiamo il router e definiamo le rotte
 const router = createRouter({
@@ -35,6 +37,10 @@ const router = createRouter({
     },
 
     { path: "/:pathMatch(.*)*", name: "not-found", component: NotFoundPage },
+
+    { path: "/thankyou", name: "thank-you-page", component: ThankYouPage },
+
+    { path: "/error", name: "error-order-page", component: ErrorOrderPage },
   ],
 });
 
