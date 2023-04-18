@@ -134,7 +134,7 @@ export default {
     <h1 class="text-white fw-bold">Completa il tuo ordine</h1>
 
     <div class="row d-flex justify-content-between mb-5">
-      <div class="col-lg-8 col-md-12 pt-2">
+      <div class="col-lg-8 col-md-12">
         <form @submit.prevent="sendForm">
           <div v-if="!showPayment">
             <div class="form-group">
@@ -148,7 +148,8 @@ export default {
                 name="nome"
                 id="nome"
                 v-model.trim="form.firstname"
-                placeholder="Inserisci nome" />
+                placeholder="Inserisci nome"
+              />
               <div class="invalid-feedback">{{ errors.firstname }}</div>
             </div>
 
@@ -163,7 +164,8 @@ export default {
                 name="cognome"
                 id="cognome"
                 v-model.trim="form.lastname"
-                placeholder="Inserisci cognome" />
+                placeholder="Inserisci cognome"
+              />
               <div class="invalid-feedback">{{ errors.lastname }}</div>
             </div>
 
@@ -180,7 +182,8 @@ export default {
                 name="indirizzo"
                 id="indirizzo"
                 v-model.trim="form.address"
-                placeholder="Inserisci indirizzo" />
+                placeholder="Inserisci indirizzo"
+              />
               <div class="invalid-feedback">{{ errors.address }}</div>
             </div>
 
@@ -197,7 +200,8 @@ export default {
                 name="telefono"
                 id="telefono"
                 v-model.trim="form.phone"
-                placeholder="Inserisci numero di telefono" />
+                placeholder="Inserisci numero di telefono"
+              />
               <div class="invalid-feedback">{{ errors.phone }}</div>
             </div>
 
@@ -212,7 +216,8 @@ export default {
                 name="email"
                 id="email"
                 v-model.trim="form.email"
-                placeholder="Inserisci mail" />
+                placeholder="Inserisci mail"
+              />
               <div class="invalid-feedback">{{ errors.email }}</div>
             </div>
 
@@ -228,20 +233,23 @@ export default {
                 :class="{ 'is-invalid': errors.delivery_time }"
                 name="delivery_time"
                 id="delivery_time"
-                v-model.trim="form.delivery_time" />
+                v-model.trim="form.delivery_time"
+              />
               <div class="invalid-feedback">{{ errors.delivery_time }}</div>
             </div>
 
             <div class="form-group d-flex justify-content-between mt-4">
               <router-link
                 :to="{ name: 'home' }"
-                class="btn btn-sm bg-danger text-white fw-bold text-white">
+                class="btn btn-sm bg-danger text-white fw-bold text-white"
+              >
                 Indietro
               </router-link>
               <button
                 @click="goToPayments"
                 type="button"
-                class="btn btn-sm btn-success indietro text-white fw-bold text-white">
+                class="btn btn-sm btn-success indietro text-white fw-bold text-white"
+              >
                 Vai al pagamento
               </button>
             </div>
@@ -254,7 +262,8 @@ export default {
             </div>
             <Braintree
               @returnToForm="showPayment = false"
-              @sendForm="sendForm"></Braintree>
+              @sendForm="sendForm"
+            ></Braintree>
           </div>
         </form>
       </div>
@@ -270,18 +279,21 @@ export default {
                   <div class="mb-3">
                     <div>
                       <div
-                        class="row d-flex align-items-center justify-content-between g-0">
+                        class="row d-flex align-items-center justify-content-between g-0"
+                      >
                         <div class="col-md-4">
                           <div v-if="dish.image">
                             <img
                               class="card-img-top rounded shadow"
-                              :src="dish.image" />
+                              :src="dish.image"
+                            />
                           </div>
                           <div v-else>
                             <img
                               class="card-img-top rounded shadow"
                               src="https://artsmidnorthcoast.com/wp-content/uploads/2014/05/no-image-available-icon-6.png"
-                              alt="" />
+                              alt=""
+                            />
                           </div>
                         </div>
                         <div class="col-md-6">
@@ -301,13 +313,16 @@ export default {
                   <div class="row d-flex justify-content-between">
                     <div class="col-auto">
                       <div
-                        class="d-flex justify-content-between align-items-center my-3">
+                        class="d-flex justify-content-between align-items-center my-3"
+                      >
                         <button
                           class="btn btn-sm indietro fw-semibold text-primary"
                           :disabled="dish.quantity == 0"
-                          @click="deleteQuantity(dish)">
+                          @click="deleteQuantity(dish)"
+                        >
                           <font-awesome-icon
-                            icon="fa-solid fa-minus"></font-awesome-icon>
+                            icon="fa-solid fa-minus"
+                          ></font-awesome-icon>
                         </button>
                         <span class="fw-semibold"
                           >Quantità:
@@ -315,18 +330,22 @@ export default {
                         >
                         <button
                           class="btn btn-sm indietro fw-semibold text-danger"
-                          @click="addQuantity(dish)">
+                          @click="addQuantity(dish)"
+                        >
                           <font-awesome-icon
-                            icon="fa-solid fa-plus"></font-awesome-icon>
+                            icon="fa-solid fa-plus"
+                          ></font-awesome-icon>
                         </button>
                       </div>
                     </div>
                     <div class="col-auto">
                       <div
-                        class="d-flex justify-content-end align-items-center my-3">
+                        class="d-flex justify-content-end align-items-center my-3"
+                      >
                         <button
                           class="btn btn-sm btn-danger text-white fw-semibold mx-2"
-                          @click="ClearDish(dish)">
+                          @click="ClearDish(dish)"
+                        >
                           <i class="fa-solid fa-trash-can" title="Elimina"></i>
                         </button>
                       </div>
@@ -347,7 +366,8 @@ export default {
             <div class="d-flex justify-content-end align-items-center my-3">
               <button
                 class="btn btn-sm btn-danger text-white fw-semibold mx-2"
-                @click="clearCart()">
+                @click="clearCart()"
+              >
                 <i class="fa-solid fa-trash-can" title="Elimina"></i>
               </button>
             </div>
