@@ -15,10 +15,10 @@ export default {
       handler(newValue) {
         if (this.addToLocalCart()) {
           localStorage.setItem("cartDishes", JSON.stringify(newValue));
-          store.cartQuantity = JSON.parse(localStorage.getItem("cartDishes")).length;
+          const cartQuantity = newValue.reduce((total, dish) => total + dish.quantity, 0);
+          store.cartQuantity = cartQuantity;
           console.log(store.cartQuantity);
-          if (!JSON.parse(localStorage.getItem("cartDishes")).length)
-            localStorage.clear();
+          if (!cartQuantity) localStorage.clear();
         }
       },
       deep: true,
@@ -26,23 +26,24 @@ export default {
   },
   methods: {
     addToCart(dish) {
-      dish.quantity = 1;
-      dish.addedToCart = true;
-      const cartDish = { ...dish };
-      this.cartDishes.push(cartDish);
-      this.addToLocalCart();
+      const cartDish = this.cartDishes.find((cartDish) => cartDish.id === dish.id);
+      if (cartDish) {
+        this.incrementQuantity(cartDish);
+      } else {
+        dish.quantity = 1;
+        dish.addedToCart = true;
+        const newCartDish = { ...dish };
+        this.cartDishes.push(newCartDish);
+        this.addToLocalCart();
+      }
     },
     incrementQuantity(dish) {
       dish.quantity++;
-      const cartDish = this.cartDishes.find((cartDish) => {
-        return cartDish.name === dish.name;
-      });
+      const cartDish = this.cartDishes.find((cartDish) => cartDish.id === dish.id);
       cartDish.quantity++;
     },
     decrementQuantity(dish) {
-      const cartDish = this.cartDishes.find((cartDish) => {
-        return cartDish.name === dish.name;
-      });
+      const cartDish = this.cartDishes.find((cartDish) => cartDish.id === dish.id);
       if (dish.quantity > 1) {
         dish.quantity--;
         cartDish.quantity--;
@@ -72,9 +73,7 @@ export default {
       ) {
         const localCartDishes = JSON.parse(localStorage.getItem("cartDishes"));
         localCartDishes.forEach((localDish) => {
-          const dish = this.dishes.find((dish) => {
-            return dish.id === localDish.id;
-          });
+          const dish = this.dishes.find((dish) => dish.id === localDish.id);
           dish.quantity = localDish.quantity;
           dish.addedToCart = true;
           this.cartDishes.push({ ...dish });
@@ -82,6 +81,7 @@ export default {
       }
     },
   },
+
   mounted() {
     // this.$refs.myFocus.focus();
     const slug = this.$route.params.slug;
