@@ -93,7 +93,7 @@ export default {
       localStorage.clear();
       store.cartQuantity = 0;
       this.cartRestaurantName = "";
-      localStorage.setItem("cartDishes", JSON.stringify(this.cartDishes[0]));
+      localStorage.setItem("cartDishes", JSON.stringify([this.cartDishes[0]]));
       localStorage.setItem("restaurantName", this.restaurant.slug);
       store.cartQuantity = 1;
     },
