@@ -116,9 +116,10 @@ export default {
 </script>
 <template>
   <div class="container py-4">
-    <h1 class="text-center text-white mb-5" id="myFocus">
-      Il Menù di "{{ restaurant.name }}"
+    <h1 class="text-center fw-bold text-white text-capitalize mt-3 mb-3" id="myFocus">
+      "{{ restaurant.name }}"
     </h1>
+    <h1 class="text-center text-white fw-bold mb-4 d-none d-md-block">Menù</h1>
     <div class="row d-flex flex-column justify-content-center align-items-center">
       <div class="alert-overlay" v-if="cartRestaurantName">
         <div class="alert alert-light col-5 text-center fw-bold" role="alert">
@@ -144,7 +145,7 @@ export default {
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <h4 class="card-title">{{ dish.name }}</h4>
+                <h4 class="card-title text-capitalize">{{ dish.name }}</h4>
                 <p class="card-text">{{ dish.description }}</p>
                 <p class="badge text-bg-success">€ {{ dish.price }}</p>
                 <div class="d-flex justify-content-end">
@@ -172,6 +173,10 @@ export default {
 
 <style scoped lang="scss">
 @import "../assets/styles/variables.scss";
+
+#myFocus {
+  font-size: 50px;
+}
 
 .card-title {
   min-height: 48px;
