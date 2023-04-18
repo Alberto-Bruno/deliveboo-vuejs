@@ -119,6 +119,7 @@ export default {
             <div class="col-md-4 img-section">
               <router-link
                 :to="{ name: 'menu', params: { slug: restaurant.slug } }"
+                @click="scrollToTop()"
               >
                 <img
                   :src="getImageRestaurants(restaurant)"
