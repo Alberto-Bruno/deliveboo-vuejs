@@ -1,7 +1,9 @@
 <script>
 import axios from "axios";
 import RestaurantsPage from "./RestaurantsPage.vue";
+
 const apiBase = "http://127.0.0.1:8000/api/types";
+
 export default {
   name: "HomePage",
   components: { RestaurantsPage },
@@ -38,9 +40,8 @@ export default {
     },
 
     scrollToRestaurant() {
-      const top = this.isActive ? 915 : 0;
       window.scrollTo({
-        top,
+        top: 915,
         behavior: "smooth",
       });
     },
@@ -56,6 +57,11 @@ export default {
         typeof this.$route.query.types == "string"
           ? [this.$route.query.types]
           : this.$route.query.types;
+    }
+  },
+  updated() {
+    if (!this.checked.length) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   },
 };
