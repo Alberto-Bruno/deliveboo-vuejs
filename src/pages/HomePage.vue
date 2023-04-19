@@ -41,7 +41,7 @@ export default {
 
     scrollToRestaurant() {
       window.scrollTo({
-        top: 915,
+        top: 550,
         behavior: "smooth",
       });
     },
