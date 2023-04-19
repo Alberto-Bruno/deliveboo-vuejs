@@ -2,7 +2,7 @@
 import { store } from "../store.js";
 import axios from "axios";
 import Braintree from "../components/Braintree.vue";
-const apiBase = "http://127.0.0.1:8000/api/new-orde";
+const apiBase = "http://127.0.0.1:8000/api/new-order";
 
 export default {
   name: "form-payments",
@@ -94,6 +94,15 @@ export default {
           window.location.href = "/thankyou";
         })
         .catch((err) => {
+          if (err.response.status === 403) {
+            const axiosErrors = err.response.data.errors;
+            const errors = Object.entries(axiosErrors);
+            errors.forEach((error) => {
+              const errorKey = error[0];
+              this.errors[errorKey] = error[1][0];
+            });
+            localStorage.setItem("formErrors", JSON.stringify(this.errors));
+          }
           window.location.href = "/error";
         });
     },
@@ -134,6 +143,9 @@ export default {
   mounted() {
     if (localStorage.getItem("checkoutData")) {
       this.form = JSON.parse(localStorage.getItem("checkoutData"));
+    }
+    if (localStorage.getItem("formErrors")) {
+      this.errors = JSON.parse(localStorage.getItem("formErrors"));
     }
     let storage = JSON.parse(localStorage.getItem("cartDishes"));
     this.cartDishes = storage;
