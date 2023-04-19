@@ -40,11 +40,15 @@ export default {
     },
 
     scrollToRestaurant() {
-      window.scrollTo({
-        top: 550,
-        behavior: "smooth",
-      });
+      let element;
+      if (window.innerWidth < 768) {
+        element = this.$refs["focus-sm"];
+      } else {
+        element = this.$refs["focus-rest"];
+      }
+      element.scrollIntoView({ behavior: "smooth" });
     },
+
     buildImagePath(image) {
       const url = new URL(`../assets/img/${image}`, import.meta.url);
       return url.href;
@@ -69,11 +73,11 @@ export default {
 
 <template>
   <section>
-    <div class="jumbo" ref="jumbo"></div>
+    <div class="jumbo"></div>
     <div class="container">
       <div class="section-header my-5">
         <h1 class="fw-bolder text-light">I piatti che ami a casa tua.</h1>
-        <h5 class="text-light">
+        <h5 class="text-light" ref="focus-rest">
           Cerca tra i ristoranti più amati e ordina online con consegna a casa
           tua.
         </h5>
@@ -131,6 +135,7 @@ export default {
       </div>
     </div>
   </section>
+  <div ref="focus-sm"></div>
   <restaurants-page></restaurants-page>
   <section id="app">
     <div class="container my-3">
