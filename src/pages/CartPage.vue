@@ -132,16 +132,7 @@ export default {
   },
   mounted() {
     let storage = JSON.parse(localStorage.getItem("cartDishes"));
-    console.log(this.cartDishes.length);
     this.cartDishes = storage;
-
-
-    if (this.cartDishes.length) {
-      store.cartQuantity = 0;
-      this.cartDishes.forEach(e => {
-        store.cartQuantity += e.quantity;
-      });
-    }
   },
 };
 </script>
@@ -155,52 +146,110 @@ export default {
         <form @submit.prevent="sendForm">
           <div v-if="!showPayment">
             <div class="form-group">
-              <label for="nome" class="control-label text-white fw-bold mt-3">Nome</label>
-              <input type="text" class="form-control" :class="{ 'is-invalid': errors.firstname }" name="nome" id="nome"
-                v-model.trim="form.firstname" placeholder="Inserisci nome" />
+              <label for="nome" class="control-label text-white fw-bold mt-3"
+                >Nome</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                :class="{ 'is-invalid': errors.firstname }"
+                name="nome"
+                id="nome"
+                v-model.trim="form.firstname"
+                placeholder="Inserisci nome" />
               <div class="invalid-feedback">{{ errors.firstname }}</div>
             </div>
 
             <div class="form-group">
-              <label for="cognome" class="control-label text-white fw-bold mt-3">Cognome</label>
-              <input type="text" class="form-control" :class="{ 'is-invalid': errors.lastname }" name="cognome"
-                id="cognome" v-model.trim="form.lastname" placeholder="Inserisci cognome" />
+              <label for="cognome" class="control-label text-white fw-bold mt-3"
+                >Cognome</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                :class="{ 'is-invalid': errors.lastname }"
+                name="cognome"
+                id="cognome"
+                v-model.trim="form.lastname"
+                placeholder="Inserisci cognome" />
               <div class="invalid-feedback">{{ errors.lastname }}</div>
             </div>
 
             <div class="form-group">
-              <label for="indirizzo" class="control-label text-white fw-bold mt-3">Indirizzo</label>
-              <input type="text" class="form-control" :class="{ 'is-invalid': errors.address }" name="indirizzo"
-                id="indirizzo" v-model.trim="form.address" placeholder="Inserisci indirizzo" />
+              <label
+                for="indirizzo"
+                class="control-label text-white fw-bold mt-3"
+                >Indirizzo</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                :class="{ 'is-invalid': errors.address }"
+                name="indirizzo"
+                id="indirizzo"
+                v-model.trim="form.address"
+                placeholder="Inserisci indirizzo" />
               <div class="invalid-feedback">{{ errors.address }}</div>
             </div>
 
             <div class="form-group">
-              <label for="telefono" class="control-label text-white fw-bold mt-3">Telefono</label>
-              <input type="phone" class="form-control" :class="{ 'is-invalid': errors.phone }" name="telefono"
-                id="telefono" v-model.trim="form.phone" placeholder="Inserisci numero di telefono" />
+              <label
+                for="telefono"
+                class="control-label text-white fw-bold mt-3"
+                >Telefono</label
+              >
+              <input
+                type="phone"
+                class="form-control"
+                :class="{ 'is-invalid': errors.phone }"
+                name="telefono"
+                id="telefono"
+                v-model.trim="form.phone"
+                placeholder="Inserisci numero di telefono" />
               <div class="invalid-feedback">{{ errors.phone }}</div>
             </div>
 
             <div class="form-group">
-              <label for="email" class="control-label text-white fw-bold mt-3">Email</label>
-              <input type="mail" class="form-control" :class="{ 'is-invalid': errors.email }" name="email" id="email"
-                v-model.trim="form.email" placeholder="Inserisci mail" />
+              <label for="email" class="control-label text-white fw-bold mt-3"
+                >Email</label
+              >
+              <input
+                type="mail"
+                class="form-control"
+                :class="{ 'is-invalid': errors.email }"
+                name="email"
+                id="email"
+                v-model.trim="form.email"
+                placeholder="Inserisci mail" />
               <div class="invalid-feedback">{{ errors.email }}</div>
             </div>
 
             <div class="form-group">
-              <label for="delivery_time" class="control-label text-white fw-bold mt-3">Orario di consegna</label>
-              <input type="time" class="form-control" :class="{ 'is-invalid': errors.delivery_time }" name="delivery_time"
-                id="delivery_time" v-model.trim="form.delivery_time" />
+              <label
+                for="delivery_time"
+                class="control-label text-white fw-bold mt-3"
+                >Orario di consegna</label
+              >
+              <input
+                type="time"
+                class="form-control"
+                :class="{ 'is-invalid': errors.delivery_time }"
+                name="delivery_time"
+                id="delivery_time"
+                v-model.trim="form.delivery_time" />
               <div class="invalid-feedback">{{ errors.delivery_time }}</div>
             </div>
 
             <div class="form-group d-flex justify-content-between mt-4">
-              <router-link :to="{ name: 'home' }" class="btn btn-outline-light fw-bold">
+              <router-link
+                :to="{ name: 'home' }"
+                class="btn btn-outline-light fw-bold">
                 Indietro
               </router-link>
-              <button @click="goToPayments" type="button" class="btn btn-outline-light fw-bold">
+              <button
+                @click="goToPayments"
+                type="button"
+                class="btn btn-outline-light fw-bold">
                 Vai al pagamento
               </button>
             </div>
@@ -211,7 +260,9 @@ export default {
                 Inserisci i dati di pagamento
               </h2>
             </div>
-            <Braintree @returnToForm="showPayment = false" @sendForm="sendForm"></Braintree>
+            <Braintree
+              @returnToForm="showPayment = false"
+              @sendForm="sendForm"></Braintree>
           </div>
         </form>
       </div>
@@ -226,13 +277,17 @@ export default {
                 <div class="dish" v-for="(dish, i) in cartDishes" :key="dish.i">
                   <div class="mb-3">
                     <div>
-                      <div class="row d-flex align-items-center justify-content-between g-0">
+                      <div
+                        class="row d-flex align-items-center justify-content-between g-0">
                         <div class="col-md-4">
                           <div v-if="dish.image">
-                            <img class="card-img-top rounded shadow" :src="dish.image" />
+                            <img
+                              class="card-img-top rounded shadow"
+                              :src="dish.image" />
                           </div>
                           <div v-else>
-                            <img class="card-img-top rounded shadow"
+                            <img
+                              class="card-img-top rounded shadow"
                               src="https://artsmidnorthcoast.com/wp-content/uploads/2014/05/no-image-available-icon-6.png"
                               alt="" />
                           </div>
@@ -243,7 +298,8 @@ export default {
                               <span>{{ dish.name }}</span>
                             </p>
                             <p class="fw-semibold mb-0">
-                              Prezzo: <span>{{ dish.price }} &euro;</span><span>x {{ dish.quantity }}</span>
+                              Prezzo: <span>{{ dish.price }} &euro;</span
+                              ><span>x {{ dish.quantity }}</span>
                             </p>
                           </div>
                         </div>
@@ -252,21 +308,33 @@ export default {
                   </div>
                   <div class="row d-flex justify-content-between">
                     <div class="col-auto">
-                      <div class="d-flex justify-content-between align-items-center my-3">
-                        <button class="btn btn-sm indietro fw-semibold text-primary" :disabled="dish.quantity == 0"
+                      <div
+                        class="d-flex justify-content-between align-items-center my-3">
+                        <button
+                          class="btn btn-sm indietro fw-semibold text-primary"
+                          :disabled="dish.quantity == 0"
                           @click="deleteQuantity(dish)">
-                          <font-awesome-icon icon="fa-solid fa-minus"></font-awesome-icon>
+                          <font-awesome-icon
+                            icon="fa-solid fa-minus"></font-awesome-icon>
                         </button>
-                        <span class="fw-semibold">Quantità:
-                          <span class="fs-5">{{ dish.quantity }}</span></span>
-                        <button class="btn btn-sm indietro fw-semibold text-danger" @click="addQuantity(dish)">
-                          <font-awesome-icon icon="fa-solid fa-plus"></font-awesome-icon>
+                        <span class="fw-semibold"
+                          >Quantità:
+                          <span class="fs-5">{{ dish.quantity }}</span></span
+                        >
+                        <button
+                          class="btn btn-sm indietro fw-semibold text-danger"
+                          @click="addQuantity(dish)">
+                          <font-awesome-icon
+                            icon="fa-solid fa-plus"></font-awesome-icon>
                         </button>
                       </div>
                     </div>
                     <div class="col-auto">
-                      <div class="d-flex justify-content-end align-items-center my-3">
-                        <button class="btn btn-sm btn-danger text-white fw-semibold mx-2" @click="ClearDish(dish)">
+                      <div
+                        class="d-flex justify-content-end align-items-center my-3">
+                        <button
+                          class="btn btn-sm btn-danger text-white fw-semibold mx-2"
+                          @click="ClearDish(dish)">
                           <i class="fa-solid fa-trash-can" title="Elimina"></i>
                         </button>
                       </div>
@@ -285,7 +353,9 @@ export default {
               </p>
             </div>
             <div class="d-flex justify-content-end align-items-center my-3">
-              <button class="btn btn-sm btn-danger text-white fw-semibold mx-2" @click="clearCart()">
+              <button
+                class="btn btn-sm btn-danger text-white fw-semibold mx-2"
+                @click="clearCart()">
                 <i class="fa-solid fa-trash-can" title="Elimina"></i>
               </button>
             </div>
