@@ -82,10 +82,7 @@ export default {
           tua.
         </h5>
 
-        <h2
-          v-if="checked.length === 0"
-          class="text-white fw-bold text-center mt-5"
-        >
+        <h2 v-if="checked.length === 0" class="text-white fw-bold text-center mt-5">
           Scopri i menù dei nostri ristoranti
         </h2>
         <h2 v-else class="text-white fw-bold text-center mt-5">
@@ -93,40 +90,20 @@ export default {
         </h2>
       </div>
 
-      <div
-        class="row align-items-stretch d-flex justify-content-center flex-wrap g-4 mb-1 pb-5"
-        ref="types-restaurant"
-      >
-        <div
-          class="check-col col-lg-2 col-md-4 col-sm-5 col-8"
-          :class="{ checked: checked.includes(t.name) }"
-          v-for="t in types"
-          :key="t.id"
-        >
-          <input
-            v-model="checked"
-            type="checkbox"
-            :id="t.name"
-            :value="t.name"
-            @click="
-              isActive = !isActive;
-              scrollToRestaurant();
-            "
-          />
+      <div class="row align-items-stretch d-flex justify-content-center flex-wrap g-4 mb-1 pb-5" ref="types-restaurant">
+        <div class="check-col col-lg-2 col-md-4 col-sm-5 col-8" :class="{ checked: checked.includes(t.name) }"
+          v-for="t in types" :key="t.id">
+          <input v-model="checked" type="checkbox" :id="t.name" :value="t.name" @click="
+            isActive = !isActive;
+          scrollToRestaurant();
+                        " />
           <label :for="t.name" class="h-100 w-100">
             <div class="cs-card d-flex flex-column h-100">
               <figure class="m-0 h-75">
-                <img
-                  :src="t.image"
-                  :alt="t.name"
-                  class="h-100 w-100"
-                  :class="{ activeTop: checked.includes(t.name) }"
-                />
+                <img :src="t.image" :alt="t.name" class="h-100 w-100" :class="{ activeTop: checked.includes(t.name) }" />
               </figure>
-              <figcaption
-                class="bg-light h-25 d-flex align-items-center justify-content-center"
-                :class="{ activeBottom: checked.includes(t.name) }"
-              >
+              <figcaption class="bg-light h-25 d-flex align-items-center justify-content-center"
+                :class="{ activeBottom: checked.includes(t.name) }">
                 <h5>{{ t.name }}</h5>
               </figcaption>
             </div>
@@ -155,28 +132,18 @@ export default {
           </div>
           <div class="group-button d-flex gap-2">
             <div class="btn bg-dark d-flex align-items-center gap-3">
-              <font-awesome-icon
-                icon="fa-brands fa-apple"
-                class="text-light fa-2x"
-              />
+              <font-awesome-icon icon="fa-brands fa-apple" class="text-light fa-2x" />
               <div class="d-flex flex-column">
                 <span class="text-light">Scarica su</span>
-                <a class="text-light text-decoration-none" href="#"
-                  >App Store</a
-                >
+                <a class="text-light text-decoration-none" href="#">App Store</a>
               </div>
             </div>
             <div>
               <div class="btn bg-dark d-flex align-items-center gap-3">
-                <font-awesome-icon
-                  icon="fa-brands fa-google-play"
-                  class="text-light fa-2x"
-                />
+                <font-awesome-icon icon="fa-brands fa-google-play" class="text-light fa-2x" />
                 <div class="d-flex flex-column">
                   <span class="text-light">Scarica su</span>
-                  <a class="text-light text-decoration-none" href="#"
-                    >Google Play</a
-                  >
+                  <a class="text-light text-decoration-none" href="#">Google Play</a>
                 </div>
               </div>
             </div>
