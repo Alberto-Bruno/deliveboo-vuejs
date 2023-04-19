@@ -295,6 +295,7 @@ export default {
             </div>
             <div class="d-flex justify-content-end align-items-center my-3">
               <button class="btn btn-sm btn-danger text-white fw-semibold mx-2" @click="clearCart()">
+                Svuota Carrello
                 <i class="fa-solid fa-trash-can" title="Elimina"></i>
               </button>
             </div>
