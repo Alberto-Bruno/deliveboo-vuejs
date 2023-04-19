@@ -2,7 +2,7 @@
 import { store } from "../store.js";
 import axios from "axios";
 import Braintree from "../components/Braintree.vue";
-const apiBase = "http://127.0.0.1:8000/api/new-order";
+const apiBase = "http://127.0.0.1:8000/api/new-orde";
 
 export default {
   name: "form-payments",
@@ -83,6 +83,7 @@ export default {
     },
 
     sendForm() {
+      localStorage.setItem("checkoutData", JSON.stringify(this.form));
       this.form.payment_status = 1;
       this.form.dishes = JSON.parse(localStorage.getItem("cartDishes"));
       this.form.total_price = this.totalPrice();
@@ -131,6 +132,9 @@ export default {
     },
   },
   mounted() {
+    if (localStorage.getItem("checkoutData")) {
+      this.form = JSON.parse(localStorage.getItem("checkoutData"));
+    }
     let storage = JSON.parse(localStorage.getItem("cartDishes"));
     this.cartDishes = storage;
   },
